@@ -24,4 +24,5 @@ export const c = {
 
     CMD_SET_MENU: 1200,
     CMD_SET_MESSAGE: 1201,
+    CMD_SET_VALUE:1203
 }

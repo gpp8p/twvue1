@@ -1,5 +1,7 @@
 <template>
   <dynaComponentTest @cevt="handleEvent($event, funcs, emit)"></dynaComponentTest>
+  <br/>
+  <button @click="testCmd">Test Cmd</button>
 </template>
 
 <script setup>
@@ -10,6 +12,9 @@ const emit = defineEmits(['cevt']);
 const funcs = [];
 const cmdHandlers = {}
 
+const testCmd = function(){
+  cmdHandlers['dynaComponentTest']([c.CMD_SET_VALUE, "test field1",'field1']);
+}
 
 funcs[c.SET_CMD_HANDLER]= function(evt){
   console.log('in SET_CMD_HANDLER-', evt);
