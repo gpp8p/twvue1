@@ -1,0 +1,30 @@
+<template>
+  <dynaComponentTest @cevt="handleEvent($event, funcs, emit)"></dynaComponentTest>
+</template>
+
+<script setup>
+import {useEventHandler} from "./components/eventHandler.js";
+import {c} from "./components/constants";
+const {handleEvent} = useEventHandler();
+const emit = defineEmits(['cevt']);
+const funcs = [];
+const cmdHandlers = {}
+
+
+funcs[c.SET_CMD_HANDLER]= function(evt){
+  console.log('in SET_CMD_HANDLER-', evt);
+  cmdHandlers[evt[2]]=evt[1];
+}
+funcs[c.UNSET_CMD_HANDLER]= function(evt){
+  console.log('in SET_CMD_HANDLER-', evt);
+  let dlt = delete cmdHandlers[evt[2]];
+}
+
+//import backgroundPickerTest from "./components/backgroundPickerTest.vue";
+//import dbTransTest from "./components/dbTransTest.vue";
+//import htmlCheckboxTest from "./components/htmlCheckboxTest.vue"
+//import htmlTextInputTest from "./components/htmlTextInputTest.vue"
+//import inpTestTest from "./components/inpTestTest.vue"
+import dynaComponentTest from "./components/dynaComponentTest.vue"
+
+</script>
