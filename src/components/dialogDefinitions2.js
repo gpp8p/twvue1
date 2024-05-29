@@ -104,6 +104,32 @@ const defs = function(dialogDef){
                             },
                             label: "Field 5"
                         },
+                        {
+                            name: 'field6',
+                            type: 'radioGroup',
+                            ref: 'field6',
+                            startFocus: false,
+                            value: function(existingData){
+                                debugger;
+                                return existingData.field6;
+                            },
+                            radioButtons :[
+                                {
+                                    label: 'red',
+                                    value: 'red'
+                                },
+                                {
+                                    label: 'blue',
+                                    value: 'blue'
+                                },
+                                {
+                                    label: 'green',
+                                    value: 'green'
+                                },
+                            ],
+                            orientation: 'horozontal',
+                            label: "Field 6"
+                        },
                 ],
                 defaultData:{
                     name: "Curious George",
@@ -114,7 +140,9 @@ const defs = function(dialogDef){
                         backgroundType: 'color',
                         colorValue: '#FFAABB',
                         fileUploaded: false,
-                    }
+                    },
+                    field6: "blue"
+
                 }
             }
         }

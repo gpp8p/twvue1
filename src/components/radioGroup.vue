@@ -2,20 +2,20 @@
   <div class="inputCss">
     <span>{{props.config.label}}</span>
     <span>
-      <input type="checkbox" v-model = "fieldValue" :checked="fieldValue==true" @change="fieldChanged" />
+      <span v-for="rad in props.config.radioButtons">
+        <input type="radio"  :name="props.config.name" :id="rad.value" >
+        <label :for="rad.value">{{rad.value}}</label>
+      </span>
     </span>
-  </div>
 
+
+  </div>
 </template>
 
 <script setup>
 
 const props = defineProps({
   config: {
-    type: Object,
-    required: true
-  },
-  data:{
     type: Object,
     required: true
   }
@@ -31,7 +31,7 @@ import {ref} from 'vue';
 
 const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
-const name = props.config.name;
+const name = 'componentName'
 const funcs = [];
 const cmdHandlers = {}
 const handleCmd = function(args){
@@ -57,11 +57,6 @@ const passCmdDown = function(args){
     }
   }
 }
-const fieldValue = ref(false);
-
-if(typeof(props.config.value)=='function'){
-  fieldValue.value = props.config.value(props.data);
-}
 
 funcs[c.SET_CMD_HANDLER]= function(evt){
   console.log('in SET_CMD_HANDLER-', evt);
@@ -70,13 +65,6 @@ funcs[c.SET_CMD_HANDLER]= function(evt){
 funcs[c.UNSET_CMD_HANDLER]= function(evt){
   console.log('in SET_CMD_HANDLER-', evt);
   let dlt = delete cmdHandlers[evt[2]];
-}
-funcs[c.CMD_SET_VALUE]= function(evt){
-  console.log(props.config.name+' CMD_SET_VALUE-', evt[2]);
-}
-const fieldChanged = function(){
-//  debugger;
-  emit('cevt', [c.FIELD_CHANGED,  props.config.name, fieldValue.value]);
 }
 
 onMounted(() => {
@@ -95,6 +83,10 @@ onUnmounted(() => {
   margin-top: 1%;
   display: grid;
   grid-template-columns: 20% 40%;
+}
+input[type="radio"] {
+  display: inline;
+  margin-right: 10px;
 }
 </style>
 

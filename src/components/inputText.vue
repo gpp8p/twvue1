@@ -37,6 +37,8 @@ import {c} from "../components/constants.js";
 import { onMounted, onUnmounted } from 'vue'
 import {useEventHandler} from "./eventHandler.js";
 import {ref, nextTick } from 'vue';
+//import {getHandleCmd} from "../components/cmdHandler.js";
+//const {handleCmd} = getHandleCmd();
 
 
 const {handleEvent} = useEventHandler();
@@ -44,6 +46,9 @@ const emit = defineEmits(['cevt']);
 const name = props.config.name;
 const funcs = [];
 const cmdHandlers = {}
+
+
+
 const handleCmd = function(args){
   console.log('handleCmd-', name, args);
   debugger;
@@ -67,6 +72,8 @@ const passCmdDown = function(args){
     }
   }
 }
+
+
 const fieldPlaceholder = ref('');
 const fieldValue = ref('');
 
@@ -142,7 +149,7 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
   let dlt = delete cmdHandlers[evt[2]];
 }
 funcs[c.CMD_SET_VALUE]= function(evt){
-  console.log('field1 CMD_SET_VALUE-', evt[2]);
+  console.log(props.config.name+' CMD_SET_VALUE-', evt[2]);
 }
 
 onMounted(() => {

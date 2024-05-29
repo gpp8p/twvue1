@@ -15,12 +15,16 @@
 import {c} from "../components/constants.js";
 import { onMounted, onUnmounted } from 'vue'
 import {useEventHandler} from "./eventHandler.js";
+//import {getHandleCmd} from "../components/cmdHandler.js";
+//const {handleCmd} = getHandleCmd();
+
 import {ref} from 'vue';
 
 import inputText from "../components/inputText.vue";
 import inputNumber from "../components/inputNumber.vue"
 import inputCheckbox from "../components/inputCheckbox.vue"
 import backgroundPicker from "../components/backgroundPicker.vue";
+import radioGroup from "../components/radioGroup.vue";
 
 
 debugger;
@@ -36,11 +40,12 @@ const emit = defineEmits(['cevt']);
 const name = 'dynaComponentTest'
 const funcs = [];
 const cmdHandlers = {}
+
 const handleCmd = function(args){
   console.log('handleCmd-', name, args);
   debugger;
   if(name==args[2] || args[2]=='*') {
-    if(typeof(funcs[args[0]]!='undefined')){
+    if(typeof(funcs[args[0]])!='undefined'){
       console.log('Found func-', args[1]);
       funcs[args[0]](args);
     }else{
@@ -60,12 +65,14 @@ const passCmdDown = function(args){
   }
 }
 
+
 const dialogData = {};
 const morphs = {
   inputText,
   inputNumber,
   inputCheckbox,
-  backgroundPicker
+  backgroundPicker,
+  radioGroup
 }
 
 
