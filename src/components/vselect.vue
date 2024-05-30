@@ -1,5 +1,12 @@
 <template>
-
+  <div class="inputCss">
+    <span>{{props.config.label}}</span>
+    <span>
+      <select v-model="fieldValue" @change="setFieldValue">
+        <option v-for="opt in props.config.selectOptions" :value="opt.value">{{opt.label}}</option>
+      </select>
+    </span>
+  </div>
 </template>
 
 <script setup>
@@ -56,6 +63,9 @@ const passCmdDown = function(args){
       cmdHandlers[availableHandlers[a]]([args[0], args[1], args[2]]);
     }
   }
+}
+const setFieldValue= function(){
+  emit('cevt', [c.FIELD_CHANGED,  props.config.name, fieldValue.value]);
 }
 
 funcs[c.SET_CMD_HANDLER]= function(evt){

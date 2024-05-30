@@ -1,4 +1,11 @@
 <template>
+  <div class="inputCss">
+    <span>{{props.config.label}}</span>
+    <span class="tacss">
+      <textarea :rows="props.config.rows" :cols="props.config.columns" v-model="fieldValue"></textarea>
+      <button @click="setFieldValue">Save</button>
+    </span>
+  </div>
 
 </template>
 
@@ -32,6 +39,11 @@ const cmdHandlers = {}
 const fieldValue = ref('');
 if(typeof(props.config.value)=='function'){
   fieldValue.value = props.config.value(props.data);
+}
+
+const setFieldValue= function(){
+  debugger;
+  emit('cevt', [c.FIELD_CHANGED,  props.config.name, fieldValue.value]);
 }
 
 const handleCmd = function(args){
@@ -84,6 +96,12 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: 20% 40%;
 }
+.tacss {
+  margin-top: 1%;
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
 
 </style>
+
 

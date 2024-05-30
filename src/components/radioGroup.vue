@@ -48,7 +48,7 @@ import {ref} from 'vue';
 
 const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
-const name = 'componentName'
+const name = props.config.name;
 const funcs = [];
 const cmdHandlers = {}
 const handleCmd = function(args){
@@ -91,6 +91,9 @@ funcs[c.SET_CMD_HANDLER]= function(evt){
 funcs[c.UNSET_CMD_HANDLER]= function(evt){
   console.log('in SET_CMD_HANDLER-', evt);
   let dlt = delete cmdHandlers[evt[2]];
+}
+funcs[c.CMD_SET_VALUE]= function(evt){
+  console.log(props.config.name+' CMD_SET_VALUE-', evt[2]);
 }
 
 onMounted(() => {

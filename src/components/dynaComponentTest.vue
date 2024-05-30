@@ -25,6 +25,8 @@ import inputNumber from "../components/inputNumber.vue"
 import inputCheckbox from "../components/inputCheckbox.vue"
 import backgroundPicker from "../components/backgroundPicker.vue";
 import radioGroup from "../components/radioGroup.vue";
+import vselect from "../components/vselect.vue";
+import vtextarea from "../components/vtextarea.vue"
 
 
 debugger;
@@ -72,7 +74,9 @@ const morphs = {
   inputNumber,
   inputCheckbox,
   backgroundPicker,
-  radioGroup
+  radioGroup,
+  vselect,
+  vtextarea
 }
 
 

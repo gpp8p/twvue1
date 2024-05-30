@@ -132,6 +132,55 @@ const defs = function(dialogDef){
                             orientation: 'vertical',
                             label: "Field 6"
                         },
+                        {
+                            name: 'field7',
+                            type: 'vselect',
+                            ref: 'field7',
+                            startFocus: false,
+                            selectType: "pulldown",
+                            selectSize: 0,
+                            value: function(existingData){
+                                debugger;
+                                return existingData.field7;
+                            },
+                            selectStyle: "mr-[10px] text-lg",
+                            selectLabelStyle: "mr-[10px] text-lg",
+                            selectOptions :[
+                                {
+                                    label: 'red',
+                                    value: 'red'
+                                },
+                                {
+                                    label: 'blue',
+                                    value: 'blue'
+                                },
+                                {
+                                    label: 'green',
+                                    value: 'green'
+                                },
+                                {
+                                    label: 'orange',
+                                    value: 'orange'
+                                },
+                            ],
+                            label: "Field 7"
+                        },
+                        {
+                            name: 'field8',
+                            type: 'vtextarea',
+                            ref: 'field8',
+                            placeholder: 'Please Enter..',
+                            rows: '6',
+                            columns: '40',
+                            maxlength: '18',
+                            startFocus: false,
+                            value: function(existingData){
+                                debugger;
+                                return existingData.field8;
+                            },
+                            label: "Field 8"
+
+                        },
                 ],
                 defaultData:{
                     name: "Curious George",
@@ -143,7 +192,9 @@ const defs = function(dialogDef){
                         colorValue: '#FFAABB',
                         fileUploaded: false,
                     },
-                    field6: "blue"
+                    field6: "blue",
+                    field7: "orange",
+                    field8: "Now is the time for every good man to come to the aid of his country"
 
                 }
             }
