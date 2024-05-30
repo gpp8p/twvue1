@@ -7,12 +7,12 @@
 
       <div class="flex-auto">
         <span>
-          <input type="radio" @click="radioSelected('color')" id="colorBackground" name="backgroundType" :checked="fieldValue.backgroundType=='color'" />
-          <label  for="colorBackground">Color</label>
+          <input type="radio" class="radioStyle" @click="radioSelected('color')" id="colorBackground" name="backgroundType" :checked="fieldValue.backgroundType=='color'" />
+          <label  :class="props.config.radioLabelStyle ||'mr-[10px] text-lg'" for="colorBackground">Color</label>
         </span>
         <span>
-          <input type="radio" @click="radioSelected('image')" value="image" id="imageBackground" name="backgroundType" :checked="fieldValue.backgroundType=='image'"/>
-          <label for="imageBackground">Image</label>
+          <input type="radio" class="radioStyle" @click="radioSelected('image')" value="image" id="imageBackground" name="backgroundType" :checked="fieldValue.backgroundType=='image'"/>
+          <label :class="props.config.radioLabelStyle ||'mr-[10px] text-lg'" for="imageBackground">Image</label>
         </span>
       </div>
       <span v-if="backType=='color'">
@@ -155,13 +155,16 @@ onUnmounted(() => {
 <style scoped>
 .componentStyle {
   display: grid;
-  grid-template-columns: 20% 20% 20%;
+  grid-template-columns: 30% 20% 20%;
   margin-top: 7px;
 }
 .inputCss {
   margin-top: 1%;
   display: grid;
   grid-template-columns: 20% 40%;
+}
+.radioStyle {
+  margin-right: 10px;
 }
 </style>
 

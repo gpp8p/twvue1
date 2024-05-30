@@ -3,12 +3,25 @@
     <span>{{props.config.label}}</span>
     <span>
       <span v-for="rad in props.config.radioButtons">
-        <input type="radio"  :name="props.config.name" :id="rad.value" >
-        <label :for="rad.value">{{rad.value}}</label>
+        <span v-if="props.config.orientation=='horozontal'">
+            <span class="radioStyle">
+              <input type="radio" class="radioStyle" :checked="rad.value==fieldValue" @click="setfieldValue(rad.value)" :name="props.config.name" :id="rad.value" >
+            </span>
+            <span :class="props.config.buttonLabelStyle || 'mr-[6px]'">
+              <label :for="rad.value">{{rad.value}}</label>
+            </span>
+        </span>
+        <span v-if="props.config.orientation=='vertical'">
+            <span>
+              <input type="radio" class="radioStyleV" :checked="rad.value==fieldValue" @click="setfieldValue(rad.value)" :name="props.config.name" :id="rad.value" >
+            </span>
+            <span :class="props.config.buttonLabelStyle || 'mr-[6px]'">
+              <label :for="rad.value">{{rad.value}}</label>
+            </span>
+          <br/>
+        </span>
       </span>
     </span>
-
-
   </div>
 </template>
 
@@ -16,6 +29,10 @@
 
 const props = defineProps({
   config: {
+    type: Object,
+    required: true
+  },
+  data:{
     type: Object,
     required: true
   }
@@ -48,6 +65,10 @@ const handleCmd = function(args){
     passCmdDown(args);
   }
 }
+const fieldValue = ref('');
+if(typeof(props.config.value)=='function'){
+  fieldValue.value = props.config.value(props.data);
+}
 const passCmdDown = function(args){
   var availableHandlers = Object.keys(cmdHandlers);
   if(availableHandlers.length>0){
@@ -56,6 +77,11 @@ const passCmdDown = function(args){
       cmdHandlers[availableHandlers[a]]([args[0], args[1], args[2]]);
     }
   }
+}
+const setfieldValue=function(selectedValue){
+  debugger;
+  fieldValue.value=selectedValue;
+  emit('cevt', [c.FIELD_CHANGED,  props.config.name, fieldValue.value]);
 }
 
 funcs[c.SET_CMD_HANDLER]= function(evt){
@@ -84,8 +110,13 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: 20% 40%;
 }
-input[type="radio"] {
+
+.radioStyle {
   display: inline;
+  margin-right: 10px;
+}
+.radioStyleV {
+  margin-top: 4px;
   margin-right: 10px;
 }
 </style>

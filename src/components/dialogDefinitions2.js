@@ -98,6 +98,7 @@ const defs = function(dialogDef){
                             type: 'backgroundPicker',
                             ref: 'field5',
                             startFocus: false,
+                            radioLabelStyle: "mr-[10px] text-lg",
                             value: function(existingData){
                                 debugger;
                                 return existingData.field5;
@@ -113,6 +114,7 @@ const defs = function(dialogDef){
                                 debugger;
                                 return existingData.field6;
                             },
+                            buttonLabelStyle: "mr-[10px] text-lg",
                             radioButtons :[
                                 {
                                     label: 'red',
@@ -127,7 +129,7 @@ const defs = function(dialogDef){
                                     value: 'green'
                                 },
                             ],
-                            orientation: 'horozontal',
+                            orientation: 'vertical',
                             label: "Field 6"
                         },
                 ],
