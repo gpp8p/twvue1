@@ -137,13 +137,15 @@ const defs = function(dialogDef){
                             type: 'vselect',
                             ref: 'field7',
                             startFocus: false,
-                            selectType: "pulldown",
-                            selectSize: 0,
+                            selectType: "scroll",
+                            selectSize: 4,
+                            selectMultiple: true,
                             value: function(existingData){
                                 debugger;
                                 return existingData.field7;
                             },
-                            selectStyle: "mr-[10px] text-lg",
+                            selectStyle: 'mr-[10px] text-lg',
+
                             selectLabelStyle: "mr-[10px] text-lg",
                             selectOptions :[
                                 {

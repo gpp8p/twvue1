@@ -1,8 +1,13 @@
 <template>
   <div class="inputCss">
     <span>{{props.config.label}}</span>
-    <span>
-      <select v-model="fieldValue" @change="setFieldValue">
+    <span v-if="props.config.selectType=='pulldown'">
+      <select v-model="fieldValue" @change="setFieldValue" :class="props.config.selectStyle || 'mr-[10px] text-lg'">
+        <option v-for="opt in props.config.selectOptions" :value="opt.value">{{opt.label}}</option>
+      </select>
+    </span>
+    <span v-if="props.config.selectType=='scroll'">
+      <select v-model="fieldValue" @change="setFieldValue" :size="props.config.selectSize" :multiple="props.config.selectMultiple"  :class="props.config.selectStyle || 'mr-[10px] text-lg'">
         <option v-for="opt in props.config.selectOptions" :value="opt.value">{{opt.label}}</option>
       </select>
     </span>
