@@ -1,12 +1,16 @@
 <template>
-  <component v-for="(aComponent, i) in dialogFields"
-             :key="i"
-             :config="dialogFields[i]"
-             :data="existingData"
-             :is="morphs[aComponent.type]"
-             :name="aComponent"
-             @cevt="handleEvent($event, funcs, emit)"
-  />
+  <span :class = dialogAppearence.twstyle>
+
+        <component v-for="(aComponent, i) in dialogFields"
+        :key="i"
+        :config="dialogFields[i]"
+        :data="existingData"
+        :is="morphs[aComponent.type]"
+        :name="aComponent"
+        @cevt="handleEvent($event, funcs, emit)"
+        />
+
+  </span>
 </template>
 
 <script setup>
@@ -35,6 +39,8 @@ import {getDialogDefinitions} from "../components/dialogDefinitions2.js";
 
 const {getDialogAppearence, getDialogFields, getDefaultData} = getDialogDefinitions();
 const dialogFields = getDialogFields('testDialog');
+
+const dialogAppearence = getDialogAppearence('testDialog');
 
 
 const {handleEvent} = useEventHandler();

@@ -32,8 +32,8 @@ const defs = function(dialogDef){
             return {
                 dialogAppearence: {
                     twPrompt: 'text-lg text-current ml-[30%] my-[5%]',
-                    prompt: 'Please Log In...',
-                    twstyle:"fixed w-[50%] h-[40%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
+                    prompt: 'Test Dialog',
+                    twstyle:"fixed w-[50%] h-auto p-[2%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
                 },
                 dialogFields :
                     [

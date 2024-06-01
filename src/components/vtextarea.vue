@@ -1,9 +1,9 @@
 <template>
   <div class="inputCss">
     <span>{{props.config.label}}</span>
-    <span class="tacss">
-      <textarea :rows="props.config.rows" :cols="props.config.columns" v-model="fieldValue"></textarea>
-      <button @click="setFieldValue">Save</button>
+    <span>
+      <textarea :rows="props.config.rows" @input="setFieldValue($event)" :cols="props.config.columns" v-model="fieldValue"></textarea>
+
     </span>
   </div>
 
@@ -41,8 +41,8 @@ if(typeof(props.config.value)=='function'){
   fieldValue.value = props.config.value(props.data);
 }
 
-const setFieldValue= function(){
-  debugger;
+const setFieldValue= function(evt){
+//  debugger;
   emit('cevt', [c.FIELD_CHANGED,  props.config.name, fieldValue.value]);
 }
 
