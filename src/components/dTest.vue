@@ -1,5 +1,5 @@
 <template>
-  <dialogFields :config="dialogFieldsConfig" :data="dialogFieldsData"></dialogFields>
+  <dialogFields :config="dialogFieldsConfig" :data="dialogFieldsData" @cevt="handleEvent($event, funcs, emit)"></dialogFields>
 </template>
 
 
