@@ -1,6 +1,4 @@
 <template>
-  <span :class = dialogAppearence.twstyle>
-
     <component v-for="(aComponent, i) in dialogFields"
                    :key="i"
                    :config="dialogFields[i]"
@@ -9,7 +7,6 @@
                    :name="aComponent"
                    @cevt="handleEvent($event, funcs, emit)"
         />
-  </span>
 </template>
 
 <script setup>
@@ -40,18 +37,26 @@ import radioGroup from "../components/radioGroup.vue";
 import vselect from "../components/vselect.vue";
 import vtextarea from "../components/vtextarea.vue";
 
-import {getDialogDefinitions} from "../components/dialogDefinitions3.js";
-const {getDialogAppearence, getDialogFields, getDefaultData, getDialogSequence} = getDialogDefinitions();
+//import {getDialogDefinitions} from "../components/dialogDefinitions3.js";
+//const {getDialogAppearence, getDialogFields, getDefaultData, getDialogSequence} = getDialogDefinitions();
 
-const dialogFields = getDialogFields('testDialog', 'test1');
-const dialogAppearence = getDialogAppearence('testDialog');
+//const dialogFields = getDialogFields('testDialog', 'test1');
+//const dialogAppearence = getDialogAppearence('testDialog');
 
+const dialogFields = props.config.dialogFields;
+const existingData = props.data;
 
-
+debugger;
+const emit = defineEmits(['cevt']);
+if(props.config.preInitialize){
+  Object.keys(existingData).forEach(function(key) {
+    console.log('Key : ' + key + ', Value : ' + existingData[key]);
+    emit('cevt', [c.FIELD_INITIALIZED,  key, existingData[key]]);
+  });
+}
 
 
 const {handleEvent} = useEventHandler();
-const emit = defineEmits(['cevt']);
 const name = props.config.name;
 const funcs = [];
 const cmdHandlers = {}
@@ -98,7 +103,7 @@ const morphs = {
 
 
 
-const existingData = getDefaultData('testDialog');
+
 
 
 funcs[c.SET_CMD_HANDLER]= function(evt){

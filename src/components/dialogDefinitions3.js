@@ -1,4 +1,5 @@
 import {c} from "../components/constants.js";
+//import menu from "./menu.vue";
 
 export function getDialogDefinitions(){
     const getDialogAppearence = function(dialogDef){
@@ -39,17 +40,22 @@ const defs = function(dialogDef, dialogPaqge){
                     prompt: 'Test Dialog',
                     twstyle:"fixed w-[50%] h-auto p-[2%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
                 },
-                dialogSequence: function(dialogData, currentMenuOpt){
-                  switch(currentMenuOpt){
-                      // do I need a type in the return arraykal1ca7
+                dialogSequence: function(evtype, dialogData, currentMenuOpt, selection){
+                    switch(evtype){
+                        case c.DATA_EVTYPE:{
+                            console.log("data evtype-",dialogData);
+                            break;
+                        }
+                        case c.SELECTION_EVTYPE:{
+                            console.log("selection evtype", selection);
+                            break;
+                        }
 
-                      case c.MENU_EXIT_DIALOG:{
-                          return [c.EXIT_DIALOG];
-                      }
-                      case c.MENU_SAVE_DIALOG_DATA:{
-                          return [c.SAVE_DIALOG_DATA];
-                      }
-                  }
+                        case c.MENU_EVTYPE:{
+                            console.log("menu evtype", currentMenuOpt);
+                            break;
+                        }
+                    }
                 },
                 dialogFields: {
                     test1 :

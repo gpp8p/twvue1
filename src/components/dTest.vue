@@ -1,5 +1,8 @@
 <template>
-  <dialogFields :config="dialogFieldsConfig" :data="dialogFieldsData" @cevt="handleEvent($event, funcs, emit)"></dialogFields>
+  <span :class = dialogAppearence.twstyle>
+    <dialogFields :config="dialogFieldsConfig" :data="dialogFieldsData" @cevt="handleEvent($event, funcs, emit)"></dialogFields>
+  </span>
+
 </template>
 
 
@@ -21,8 +24,23 @@ import {useEventHandler} from "./eventHandler.js";
 import {ref} from 'vue';
 
 import dialogFields from "../components/dialogFields3.vue";
+
+import {getDialogDefinitions} from "../components/dialogDefinitions3.js";
+const {getDialogAppearence, getDialogFields, getDefaultData, getDialogSequence} = getDialogDefinitions();
+
+
 const dialogFieldsConfig = ref({});
+dialogFieldsConfig.value.dialogFields = getDialogFields('testDialog', 'test1');
+//dialogFieldsConfig.value.existingData = getDefaultData('testDialog');
+
+dialogFieldsConfig.value.preInitialize = props.config.preInitialize;
+
+const dialogAppearence = getDialogAppearence('testDialog');
+
 const dialogFieldsData = ref({});
+dialogFieldsData.value = getDefaultData('testDialog');
+
+const dialogSequence = getDialogSequence('testDialog');
 
 const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
@@ -71,6 +89,12 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
 }
 funcs[c.FIELD_CHANGED]= function(evt){
   console.log('in c.FIELD_CHANGED-', evt);
+  dialogData[evt[1]]=evt[2];
+  debugger;
+  dialogSequence(c.DATA_EVTYPE, dialogData, 0, 0);
+}
+funcs[c.FIELD_INITIALIZED]= function(evt){
+  console.log('in c.FIELD_INITIALIZED-', evt);
   dialogData[evt[1]]=evt[2];
 }
 onMounted(() => {

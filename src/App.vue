@@ -20,6 +20,7 @@ const cmdHandlers = {}
 
 const dialogFieldsConfig = ref({});
 dialogFieldsConfig.value.name = "dialog";
+dialogFieldsConfig.value.preInitialize=true;
 const dialogFieldsData = ref({});
 
 
