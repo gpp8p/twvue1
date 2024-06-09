@@ -31,6 +31,7 @@ import backgroundPicker from "../components/backgroundPicker.vue";
 import radioGroup from "../components/radioGroup.vue";
 import vselect from "../components/vselect.vue";
 import vtextarea from "../components/vtextarea.vue"
+import listScroller from "../components/listScroller.vue";
 
 
 debugger;
@@ -39,6 +40,7 @@ import {getDialogDefinitions} from "../components/dialogDefinitions2.js";
 
 const {getDialogAppearence, getDialogFields, getDefaultData} = getDialogDefinitions();
 const dialogFields = getDialogFields('testDialog');
+console.log('dialogFields-',dialogFields);
 
 const dialogAppearence = getDialogAppearence('testDialog');
 
@@ -82,7 +84,8 @@ const morphs = {
   backgroundPicker,
   radioGroup,
   vselect,
-  vtextarea
+  vtextarea,
+  listScroller
 }
 
 

@@ -67,6 +67,7 @@ const defs = function(dialogDef){
                             startFocus: false,
                             label: "Field 2"
                         },
+/*
                         {
                             name: 'field3',
                             type: 'inputText',
@@ -82,6 +83,8 @@ const defs = function(dialogDef){
                             label: "Field 3"
 
                         },
+
+
                         {
                             name: 'field4',
                             type: 'inputCheckbox',
@@ -137,8 +140,8 @@ const defs = function(dialogDef){
                             type: 'vselect',
                             ref: 'field7',
                             startFocus: false,
-                            selectType: "scroll",
-                            selectSize: 4,
+                            selectType: "pulldown",
+                            selectSize: 3,
                             selectMultiple: true,
                             value: function(existingData){
                                 debugger;
@@ -183,6 +186,20 @@ const defs = function(dialogDef){
                             label: "Field 8"
 
                         },
+
+ */
+                        {
+                            name: 'field9',
+                            type: 'listScroller',
+                            ref: 'field9',
+                            selectSize:'5',
+                            startFocus: false,
+                            value: function(existingData){
+                                debugger;
+                                return existingData.field9;
+                            },
+                            label: "Field 9"
+                        }
                 ],
                 defaultData:{
                     name: "Curious George",
@@ -196,8 +213,8 @@ const defs = function(dialogDef){
                     },
                     field6: "blue",
                     field7: "orange",
-                    field8: "Now is the time for every good man to come to the aid of his country"
-
+                    field8: "Now is the time for every good man to come to the aid of his country",
+                    field9: ['line1','line2','line3','line4','line5','line6','line7','line8','line9','line10'],
                 }
             }
         }

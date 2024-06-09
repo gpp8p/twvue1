@@ -58,6 +58,7 @@ const defs = function(dialogDef, dialogPaqge){
                     }
                 },
                 dialogFields: {
+ //                   debugger;
                     test1 :
                         [
                             {
@@ -205,6 +206,17 @@ const defs = function(dialogDef, dialogPaqge){
                                 },
                                 label: "Field 8"
                             },
+                            {
+                                name: 'field9',
+                                type: 'listScroller',
+                                ref: 'field9',
+                                startFocus: false,
+                                value: function(existingData){
+                                    debugger;
+                                    return existingData.field9;
+                                },
+                                label: "Field 9"
+                            }
                         ],
                 },
 
@@ -220,7 +232,8 @@ const defs = function(dialogDef, dialogPaqge){
                     },
                     field6: "blue",
                     field7: "orange",
-                    field8: "Now is the time for every good man to come to the aid of his country"
+                    field8: "Now is the time for every good man to come to the aid of his country",
+                    field9: ['line1','line2','line3','line4','line5','line6','line7','line8','line9','line10',]
 
                 }
             }

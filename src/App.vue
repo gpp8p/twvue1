@@ -1,15 +1,10 @@
 <template>
-  <dTest :config="dialogFieldsConfig" :data="dialogFieldsData"></dTest>
+  <dynaComponentTest @cevt="handleEvent($event, funcs, emit)"></dynaComponentTest>
   <br/>
   <button @click="testCmd">Test Cmd</button>
 </template>
 
 <script setup>
-debugger;
-import dTest from "./components/dTest.vue";
-import dialog from "./components/dTest.vue";
-import {ref} from "vue";
-
 import {useEventHandler} from "./components/eventHandler.js";
 import {c} from "./components/constants";
 //import {getHandleCmd} from "./components/cmdHandler.js";
@@ -17,12 +12,6 @@ const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
 const funcs = [];
 const cmdHandlers = {}
-
-const dialogFieldsConfig = ref({});
-dialogFieldsConfig.value.name = "dialog";
-dialogFieldsConfig.value.preInitialize=true;
-const dialogFieldsData = ref({});
-
 
 const testCmd = function(){
   cmdHandlers['dynaComponentTest']([c.CMD_SET_VALUE, "test field1",'*']);
@@ -42,8 +31,6 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
 //import htmlCheckboxTest from "./components/htmlCheckboxTest.vue"
 //import htmlTextInputTest from "./components/htmlTextInputTest.vue"
 //import inpTestTest from "./components/inpTestTest.vue"
-//import dynaComponentTest from "./components/dynaComponentTest.vue"
-
-
+import dynaComponentTest from "./components/dynaComponentTest.vue"
 
 </script>
