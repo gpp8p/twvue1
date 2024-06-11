@@ -1,14 +1,12 @@
 <template>
-  <div class="inputCss">
-    <span>{{props.config.label}}</span>
-    <span class="selectWrapper" ref="selectWrapper">
-         <select :style="selectWidth" v-model="fieldValue" @change="setFieldValue" :size="props.config.selectSize" :multiple="props.config.selectMultiple"  :class="props.config.selectStyle || 'mr-[10px] text-lg'">
-            <option class="selectOpt" v-for="item in props.data[props.config.name]" :key="item">{{trimIt(item)}}</option>
-          </select>
-    </span>
+  <span :class="overflow-y-scroll">
+    <lTab
 
-
-  </div>
+        :config="props.config"
+        :data="props.data"
+        :key="tableReload"
+    ></lTab>
+  </span>
 
 </template>
 
@@ -30,9 +28,8 @@ const props = defineProps({
 import {c} from "../components/constants.js";
 import { onMounted, onUnmounted } from 'vue'
 import {useEventHandler} from "./eventHandler.js";
+import lTab from "../components/lTab.vue";
 import {ref} from 'vue';
-import { useElementSize } from '@vueuse/core'
-
 
 
 const {handleEvent} = useEventHandler();
@@ -45,20 +42,8 @@ const fieldValue = ref('');
 if(typeof(props.config.value)=='function'){
   fieldValue.value = props.config.value(props.data);
 }
+const tableReload = ref(1);
 
-const selectWrapper = ref(null);
-const { width, height } = useElementSize(selectWrapper) ;
-const selectWidth = ref('');
-
-
-const selectedIndex = ref(0);
-const scrollerRef = ref(null);
-
-const space80 = '                                                                               ';
-function trimIt(str){
-  console.log(str+space80.length)
-  return str+space80.substr(1,80);
-}
 const handleCmd = function(args){
   console.log('handleCmd-', name, args);
   debugger;
@@ -73,7 +58,6 @@ const handleCmd = function(args){
     passCmdDown(args);
   }
 }
-
 const passCmdDown = function(args){
   var availableHandlers = Object.keys(cmdHandlers);
   if(availableHandlers.length>0){
@@ -83,7 +67,6 @@ const passCmdDown = function(args){
     }
   }
 }
-
 
 funcs[c.SET_CMD_HANDLER]= function(evt){
   console.log('in SET_CMD_HANDLER-', evt);
@@ -96,8 +79,6 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
 
 onMounted(() => {
   debugger;
-  console.log('width-', width._value);
-  selectWidth.value = 'width:'+(width.value).toFixed()+'px;';
   emit('cevt', [c.SET_CMD_HANDLER, handleCmd, name]);
 })
 
@@ -111,14 +92,14 @@ onUnmounted(() => {
 .inputCss {
   margin-top: 1%;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 20% 40%;
 }
-
-.selectOpt {
-  width: 500px;
-}
-.selectWrapper {
+.scrollTable {
+  font-family: Arial;
   width: 100%;
+  margin-right: 10%;
+  overflow-y:scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 </style>

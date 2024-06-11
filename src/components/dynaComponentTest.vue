@@ -31,7 +31,7 @@ import backgroundPicker from "../components/backgroundPicker.vue";
 import radioGroup from "../components/radioGroup.vue";
 import vselect from "../components/vselect.vue";
 import vtextarea from "../components/vtextarea.vue"
-import listScroller from "../components/listScroller.vue";
+import listTable from "../components/listTable.vue";
 
 
 debugger;
@@ -85,7 +85,7 @@ const morphs = {
   radioGroup,
   vselect,
   vtextarea,
-  listScroller
+  listTable
 }
 
 

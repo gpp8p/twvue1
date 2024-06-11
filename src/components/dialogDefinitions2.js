@@ -33,7 +33,7 @@ const defs = function(dialogDef){
                 dialogAppearence: {
                     twPrompt: 'text-lg text-current ml-[30%] my-[5%]',
                     prompt: 'Test Dialog',
-                    twstyle:"fixed w-[50%] h-auto p-[2%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
+                    twstyle:"fixed w-[50%] h-auto v-auto p-[2%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
                 },
                 dialogFields :
                     [
@@ -190,10 +190,46 @@ const defs = function(dialogDef){
  */
                         {
                             name: 'field9',
-                            type: 'listScroller',
+                            type: 'listTable',
                             ref: 'field9',
-                            selectSize:'5',
+                            selectSize:'9',
                             startFocus: false,
+                            columns: [
+                                {
+                                    field: 'id',
+                                    label: 'ID',
+                                    width: '10%',
+                                    numeric: true,
+                                    visible: true
+                                },
+                                {
+                                    field: 'menu_label',
+                                    label: 'Name',
+                                    width: '30%',
+                                    visible: true
+                                },
+                                {
+                                    field: 'description',
+                                    label: 'Description',
+                                    width: '30%',
+                                    visible: true
+
+                                },
+
+                                {
+                                    field: 'height',
+                                    label: 'Height',
+                                    width: '10%',
+                                    visible: false
+                                },
+                                {
+                                    field: 'width',
+                                    label: 'Width',
+                                    width: '10%',
+                                    visible: false
+                                }
+                            ],
+
                             value: function(existingData){
                                 debugger;
                                 return existingData.field9;
@@ -214,7 +250,26 @@ const defs = function(dialogDef){
                     field6: "blue",
                     field7: "orange",
                     field8: "Now is the time for every good man to come to the aid of his country",
-                    field9: ['line1','line2','line3','line4','line5','line6','line7','line8','line9','line10'],
+                    field9: [
+                        {"id":1,"description":"created in insert 1229","menu_label":"insert create 1229","height":15,"width":15},
+                        {"id":2,"description":"Default Template","menu_label":"Default Template","height":15,"width":15},
+                        {"id":3,"description":"Land","menu_label":"Land","height":15,"width":15},
+                        {"id":4,"description":"People","menu_label":"People","height":15,"width":15},
+                        {"id":5,"description":"Our Setup","menu_label":"Our Setup","height":15,"width":15},
+                        {"id":6,"description":"Documents","menu_label":"Documents","height":15,"width":15},
+                        {"id":7,"description":"tatement of Values","menu_label":"Values Page","height":15,"width":15},
+                        {"id":8,"description":"The Basics","menu_label":"The Basics","height":15,"width":15},
+                        {"id":1,"description":"created in insert 1229","menu_label":"insert create 1229","height":15,"width":15},
+                        {"id":2,"description":"Default Template","menu_label":"Default Template","height":15,"width":15},
+                        {"id":3,"description":"Land","menu_label":"Land","height":15,"width":15},
+                        {"id":4,"description":"People","menu_label":"People","height":15,"width":15},
+                        {"id":5,"description":"Our Setup","menu_label":"Our Setup","height":15,"width":15},
+                        {"id":6,"description":"Documents","menu_label":"Documents","height":15,"width":15},
+                        {"id":7,"description":"tatement of Values","menu_label":"Values Page","height":15,"width":15},
+                        {"id":8,"description":"The Basics","menu_label":"The Basics","height":15,"width":15},
+
+
+                    ]
                 }
             }
         }

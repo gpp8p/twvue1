@@ -1,0 +1,178 @@
+<template>
+  <span :class="overflow-y-scroll">
+    <h2>lTab here</h2>
+    <table class="styled-table">
+      <thead class="headerClass">
+        <tr>
+          <th :style="thisColumn.columnStyle" v-for="(thisColumn, index) in props.config.columns"
+              :key="index"
+          >
+            <span  v-if="thisColumn.visible">{{thisColumn.label}}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="scroll-auto">
+         <tr v-for="(row, rowIndex) in filteredData" :key="rowIndex" @click="rowSelected(rowIndex)">
+            <td v-for="(cell, cellIndex) in row" :key="cellIndex">
+              {{ cell }}
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </span>
+</template>
+
+<script setup>
+
+const props = defineProps({
+  config: {
+    type: Object,
+    required: true
+  },
+  data:{
+    type: Object,
+    required: true
+  }
+});
+
+
+
+import {c} from "../components/constants.js";
+import { onMounted, onUnmounted } from 'vue'
+import {useEventHandler} from "./eventHandler.js";
+import {ref} from 'vue';
+
+
+const {handleEvent} = useEventHandler();
+const emit = defineEmits(['cevt']);
+const name = props.config.name;
+const funcs = [];
+const cmdHandlers = {}
+
+const fieldValue = ref('');
+if(typeof(props.config.value)=='function'){
+  fieldValue.value = props.config.value(props.data);
+}
+console.log('columns--', props.config.columns);
+const filteredData = ref([]);
+//console.log('fieldValue--', fieldValue.value.length);
+for(var r = 0; r<fieldValue.value.length; ++r){
+//  console.log('this field-',fieldValue.value[r]);
+  var filteredRow = [];
+  for(var cols = 0; cols< props.config.columns.length; cols++){
+    console.log('cols--', props.config.columns[cols].field);
+    console.log('field content-',fieldValue.value[r][props.config.columns[cols].field]);
+    debugger;
+    if(props.config.columns[cols].visible){
+      filteredRow.push(fieldValue.value[r][props.config.columns[cols].field]);
+    }
+  }
+  console.log('filteredRow', filteredRow);
+  filteredData.value.push(filteredRow);
+}
+console.log('filteredData-', filteredData);
+
+const handleCmd = function(args){
+  console.log('handleCmd-', name, args);
+  debugger;
+  if(name==args[2] || args[2]=='*') {
+    if(typeof(funcs[args[0]])!='undefined'){
+      console.log('Found func-', args[1]);
+      funcs[args[0]](args);
+    }else{
+      passCmdDown(args);
+    }
+  }else{
+    passCmdDown(args);
+  }
+}
+const passCmdDown = function(args){
+  var availableHandlers = Object.keys(cmdHandlers);
+  if(availableHandlers.length>0){
+    for(var a=0;a<availableHandlers.length;a++){
+//                debugger;
+      cmdHandlers[availableHandlers[a]]([args[0], args[1], args[2]]);
+    }
+  }
+}
+
+funcs[c.SET_CMD_HANDLER]= function(evt){
+  console.log('in SET_CMD_HANDLER-', evt);
+  cmdHandlers[evt[2]]=evt[1];
+}
+funcs[c.UNSET_CMD_HANDLER]= function(evt){
+  console.log('in SET_CMD_HANDLER-', evt);
+  let dlt = delete cmdHandlers[evt[2]];
+}
+
+onMounted(() => {
+  debugger;
+  emit('cevt', [c.SET_CMD_HANDLER, handleCmd, name]);
+//  console.log("columns-", props.config[props.config.name].columns);
+})
+
+onUnmounted(() => {
+  emit('cevt', [c.UNSET_CMD_HANDLER, name]);
+})
+
+</script>
+
+<style scoped>
+.inputCss {
+  margin-top: 1%;
+  display: grid;
+  grid-template-columns: 20% 40%;
+}
+
+.styled-table {
+  border: 2px;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 100%;
+  overflow: auto;
+
+}
+.styled-table thead tr {
+  background-color: #0a3ae7;
+  color: #ffffff;
+  text-align: left;
+}
+.styled-table th,
+.styled-table td {
+  padding-top:15px;
+  text-align: left;
+}
+.styled-table tr:hover {
+  background-color: #4AAE9B;
+}
+
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+.scrolled {
+  height: 250px;
+}
+
+.tableContainer {
+  height: 300px;
+  overflow: auto;
+}
+.table {
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+</style>
+
