@@ -1,7 +1,5 @@
 <template>
   <dynaComponentTest @cevt="handleEvent($event, funcs, emit)"></dynaComponentTest>
-  <br/>
-  <button @click="testCmd">Test Cmd</button>
 </template>
 
 <script setup>
@@ -34,3 +32,4 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
 import dynaComponentTest from "./components/dynaComponentTest.vue"
 
 </script>
+

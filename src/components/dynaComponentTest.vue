@@ -1,16 +1,16 @@
 <template>
-  <span :class = dialogAppearence.twstyle>
-
-        <component v-for="(aComponent, i) in dialogFields"
-        :key="i"
-        :config="dialogFields[i]"
-        :data="existingData"
-        :is="morphs[aComponent.type]"
-        :name="aComponent"
-        @cevt="handleEvent($event, funcs, emit)"
-        />
-
-  </span>
+  <div :class = dialogAppearence.twstyle>
+    <div >
+      <component v-for="(aComponent, i) in dialogFields"
+                 :key="i"
+                 :config="dialogFields[i]"
+                 :data="existingData"
+                 :is="morphs[aComponent.type]"
+                 :name="aComponent"
+                 @cevt="handleEvent($event, funcs, emit)"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -123,7 +123,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-
+.dynaComponentTest {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
+}
 </style>
 
 

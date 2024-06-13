@@ -33,7 +33,7 @@ const defs = function(dialogDef){
                 dialogAppearence: {
                     twPrompt: 'text-lg text-current ml-[30%] my-[5%]',
                     prompt: 'Test Dialog',
-                    twstyle:"fixed w-[50%] h-auto v-auto p-[2%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
+                    twstyle:"fixed w-[50%] h-auto p-[2%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
                 },
                 dialogFields :
                     [
@@ -135,12 +135,13 @@ const defs = function(dialogDef){
                             orientation: 'vertical',
                             label: "Field 6"
                         },
+
                         {
                             name: 'field7',
                             type: 'vselect',
                             ref: 'field7',
                             startFocus: false,
-                            selectType: "pulldown",
+                            selectType: "scroll",
                             selectSize: 3,
                             selectMultiple: true,
                             value: function(existingData){
@@ -170,6 +171,7 @@ const defs = function(dialogDef){
                             ],
                             label: "Field 7"
                         },
+
                         {
                             name: 'field8',
                             type: 'vtextarea',
@@ -187,7 +189,7 @@ const defs = function(dialogDef){
 
                         },
 
- */
+*/
                         {
                             name: 'field9',
                             type: 'listTable',
@@ -236,6 +238,8 @@ const defs = function(dialogDef){
                             },
                             label: "Field 9"
                         }
+
+
                 ],
                 defaultData:{
                     name: "Curious George",

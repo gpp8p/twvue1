@@ -1,5 +1,5 @@
 <template>
-  <span :class="overflow-y-scroll">
+  <div>
     <h2>lTab here</h2>
     <table class="styled-table">
       <thead class="headerClass">
@@ -19,7 +19,7 @@
           </tr>
       </tbody>
     </table>
-  </span>
+  </div>
 </template>
 
 <script setup>
@@ -56,7 +56,7 @@ if(typeof(props.config.value)=='function'){
 console.log('columns--', props.config.columns);
 const filteredData = ref([]);
 //console.log('fieldValue--', fieldValue.value.length);
-for(var r = 0; r<fieldValue.value.length; ++r){
+for(var r = props.config.rowStart; r<(props.config.rowStart+props.config.rowsToShow); ++r){
 //  console.log('this field-',fieldValue.value[r]);
   var filteredRow = [];
   for(var cols = 0; cols< props.config.columns.length; cols++){
@@ -129,8 +129,6 @@ onUnmounted(() => {
   font-size: 0.9em;
   font-family: sans-serif;
   width: 100%;
-  overflow: auto;
-
 }
 .styled-table thead tr {
   background-color: #0a3ae7;
@@ -169,9 +167,10 @@ onUnmounted(() => {
   overflow: auto;
 }
 .table {
-  position: sticky;
+
   top: 0;
   width: 100%;
+  height:400px;
 }
 
 </style>

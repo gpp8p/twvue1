@@ -7,7 +7,7 @@
       </select>
     </span>
     <span v-if="props.config.selectType=='scroll'">
-      <select v-model="fieldValue" @change="setFieldValue" :size="props.config.selectSize" :multiple="props.config.selectMultiple"  :class="props.config.selectStyle || 'mr-[10px] text-lg'">
+      <select class="optStyleScroll"  v-model="fieldValue" @change="setFieldValue" :size="props.config.selectSize" :multiple="props.config.selectMultiple"  :class="props.config.selectStyle || 'mr-[10px] text-lg'">
         <option v-for="opt in props.config.selectOptions" :value="opt.value">{{opt.label}}</option>
       </select>
     </span>
@@ -98,6 +98,11 @@ onUnmounted(() => {
   margin-top: 1%;
   display: grid;
   grid-template-columns: 20% 40%;
+}
+.optStyleScroll {
+  option:hover {
+    background-color: green;
+  }
 }
 
 </style>

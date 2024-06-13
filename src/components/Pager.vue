@@ -1,15 +1,5 @@
 <template>
-  <div class="tablePlusPager">
-    <lTab
-        :config="currentTableConfig"
-        :data="props.data"
-        :key="tableReload"
-    ></lTab>
-    <div><Pager
-      :config="pagerProps"
-      :data = "pagerData"
-    ></Pager></div>
-  </div>
+  <h2>Pager Here</h2>
 </template>
 
 <script setup>
@@ -30,9 +20,7 @@ const props = defineProps({
 import {c} from "../components/constants.js";
 import { onMounted, onUnmounted } from 'vue'
 import {useEventHandler} from "./eventHandler.js";
-import lTab from "../components/lTab.vue";
 import {ref} from 'vue';
-import Pager from "../components/Pager.vue";
 
 
 const {handleEvent} = useEventHandler();
@@ -45,16 +33,6 @@ const fieldValue = ref('');
 if(typeof(props.config.value)=='function'){
   fieldValue.value = props.config.value(props.data);
 }
-const tableReload = ref(1);
-const rowStart = ref(0);
-const rowsToShow = ref(4);
-const pagerProps = ref({});
-pagerProps.value.name = 'pager';
-const pagerData = ref({});
-
-const currentTableConfig = ref(props.config);
-currentTableConfig.value.rowStart = rowStart;
-currentTableConfig.value.rowsToShow = rowsToShow;
 
 const handleCmd = function(args){
   console.log('handleCmd-', name, args);
@@ -105,18 +83,6 @@ onUnmounted(() => {
   margin-top: 1%;
   display: grid;
   grid-template-columns: 20% 40%;
-}
-.scrollTable {
-  font-family: Arial;
-  width: 100%;
-  margin-right: 10%;
-  overflow-y:scroll;
-  -webkit-overflow-scrolling: touch;
-}
-.tablePlusPager {
-  display: grid;
-  grid-template-rows: 90% 10%;
-  grid-template-columns: 100%;
 }
 
 </style>

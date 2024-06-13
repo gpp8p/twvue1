@@ -1,11 +1,11 @@
 <template>
   <div class="inputCss">
-    <span>{{props.config.label}}</span>
-    <span class="selectWrapper" ref="selectWrapper">
+    <div>{{props.config.label}}</div>
+    <div class="selectWrapper" ref="selectWrapper">
          <select :style="selectWidth" v-model="fieldValue" @change="setFieldValue" :size="props.config.selectSize" :multiple="props.config.selectMultiple"  :class="props.config.selectStyle || 'mr-[10px] text-lg'">
             <option class="selectOpt" v-for="item in props.data[props.config.name]" :key="item">{{trimIt(item)}}</option>
           </select>
-    </span>
+    </div>
 
 
   </div>
@@ -119,6 +119,7 @@ onUnmounted(() => {
 }
 .selectWrapper {
   width: 100%;
+  overflow: scroll;
 }
 
 </style>
