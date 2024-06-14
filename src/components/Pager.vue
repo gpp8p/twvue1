@@ -1,5 +1,64 @@
 <template>
-  <h2>Pager Here</h2>
+  <ul class="pagination">
+    <li class="pagination-item" v-if="!isInFirstPage">
+      <button
+          type="button"
+          @click="onClickFirstPage"
+          :disabled="isInFirstPage"
+      >
+        First
+      </button>
+    </li>
+
+    <li class="pagination-item" v-if="!isInFirstPage">
+      <button
+          type="button"
+          @click="onClickPreviousPage"
+          :disabled="isInFirstPage"
+      >
+        Previous
+      </button>
+    </li>
+
+    <!-- Visible Buttons Start -->
+
+    <li
+        v-for="page in pages"
+        :key="page.name"
+        class="pagination-item"
+    >
+      <button
+          type="button"
+          @click="onClickPage(page.name)"
+          :disabled="page.isDisabled"
+          :class="{ active: isPageActive(page.name) }"
+      >
+        {{ page.name }}
+      </button>
+    </li>
+
+    <!-- Visible Buttons End -->
+
+    <li class="pagination-item">
+      <button
+          type="button"
+          @click="onClickNextPage"
+          :disabled="isInLastPage"
+      >
+        Next
+      </button>
+    </li>
+
+    <li class="pagination-item">
+      <button
+          type="button"
+          @click="onClickLastPage"
+          :disabled="isInLastPage"
+      >
+        Last
+      </button>
+    </li>
+  </ul>
 </template>
 
 <script setup>
@@ -21,6 +80,7 @@ import {c} from "../components/constants.js";
 import { onMounted, onUnmounted } from 'vue'
 import {useEventHandler} from "./eventHandler.js";
 import {ref} from 'vue';
+import { reactive, computed } from 'vue'
 
 
 const {handleEvent} = useEventHandler();
@@ -57,6 +117,69 @@ const passCmdDown = function(args){
     }
   }
 }
+const isInFirstPage = computed(() => {
+  return props.config.currentPage === 1;
+})
+
+const isInLastPage = computed(() => {
+  return props.config.currentPage === props.config.totalPages;
+})
+
+const startPage = computed(() => {
+  if (pros.config.currentPage === 1) {
+    return 1;
+  }
+
+  // When on the last page
+  if (props.config.currentPage === props.config.totalPages) {
+    return props.config.totalPages - props.config.maxVisibleButtons;
+  }
+
+  // When inbetween
+//      return this.currentPage - 1;
+  return props.config.currentPage;
+})
+const pages = computed(() => {
+  const range = [];
+
+  for (
+      let i = startPage;
+      i <= Math.min(startPage + props.config.maxVisibleButtons - 1, props.config.totalPages);
+      i++
+  ) {
+    range.push({
+      name: i,
+      isDisabled: i === props.config.currentPage
+    });
+  }
+
+  return range;
+})
+
+const isPageActive = function(page) {
+  return props.config.currentPage === page;
+//      return this.currentPage === page+1;
+}
+
+const onClickFirstPage = function(){
+  emit('cevt',['firstPage']);
+}
+
+const onClickPreviousPage = function(){
+  emit('cevt',['previousPage']);
+}
+
+const onClickPage = function(page){
+  emit('cevt',['page', page]);
+}
+
+const onClickNextPage = function(){
+  emit('cevt',['nextPage', props.config.currentPage + 1]);
+}
+const onClickLastPage = function(){
+  emit('pagechanged', this.totalPages);
+  emit('cevt',['lastPage', this.totalPages]);
+}
 
 funcs[c.SET_CMD_HANDLER]= function(evt){
   console.log('in SET_CMD_HANDLER-', evt);
@@ -79,10 +202,24 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+
 .inputCss {
   margin-top: 1%;
   display: grid;
   grid-template-columns: 20% 40%;
+}
+
+.pagination {
+  list-style-type: none;
+}
+
+.pagination-item {
+  display: inline-block;
+}
+
+.active {
+  background-color: #4AAE9B;
+  color: #ffffff;
 }
 
 </style>
