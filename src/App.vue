@@ -29,6 +29,7 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
 //import htmlCheckboxTest from "./components/htmlCheckboxTest.vue"
 //import htmlTextInputTest from "./components/htmlTextInputTest.vue"
 //import inpTestTest from "./components/inpTestTest.vue"
+//import AppButton from "./components/AppButton.vue";
 import dynaComponentTest from "./components/dynaComponentTest.vue"
 
 </script>

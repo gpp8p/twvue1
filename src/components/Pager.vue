@@ -1,4 +1,5 @@
 <template>
+  <input type="button"  value="Click me">
   <ul class="pagination">
     <li class="pagination-item" v-if="!isInFirstPage">
       <button
@@ -162,23 +163,23 @@ const isPageActive = function(page) {
 }
 
 const onClickFirstPage = function(){
-  emit('cevt',['firstPage']);
+  emit('cevt',[c.FIRST_PAGE]);
 }
 
 const onClickPreviousPage = function(){
-  emit('cevt',['previousPage']);
+  emit('cevt',[c.PREV_PAGE]);
 }
 
 const onClickPage = function(page){
-  emit('cevt',['page', page]);
+  emit('cevt',[c.THIS_PAGE, page]);
 }
 
 const onClickNextPage = function(){
-  emit('cevt',['nextPage', props.config.currentPage + 1]);
+  emit('cevt',[c.NEXT_PAGE, props.config.currentPage + 1]);
 }
 const onClickLastPage = function(){
-  emit('pagechanged', this.totalPages);
-  emit('cevt',['lastPage', this.totalPages]);
+  emit(c.PAGE_CHANGED, this.totalPages);
+  emit('cevt',[c.LAST_PAGE, this.totalPages]);
 }
 
 funcs[c.SET_CMD_HANDLER]= function(evt){
@@ -220,6 +221,16 @@ onUnmounted(() => {
 .active {
   background-color: #4AAE9B;
   color: #ffffff;
+}
+.button {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
 </style>

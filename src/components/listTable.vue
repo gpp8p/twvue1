@@ -1,15 +1,20 @@
 <template>
-  <div class="tablePlusPager">
-    <lTab
-        :config="currentTableConfig"
-        :data="props.data"
-        :key="tableReload"
-    ></lTab>
-    <div><Pager
-      :config="pagerProps"
-      :data = "pagerData"
-    ></Pager></div>
-  </div>
+
+     <div class="tablePlusPager">
+      <lTab
+          :config="currentTableConfig"
+          :data="props.data"
+          :key="tableReload"
+          @cevt="handleEvent($event, funcs, emit)"
+      ></lTab>
+      <div><Pager
+          :config="pagerProps"
+          :data = "pagerData"
+          @cevt="handleEvent($event, funcs, emit)"
+      ></Pager></div>
+    </div>
+
+
 </template>
 
 <script setup>
@@ -30,7 +35,7 @@ const props = defineProps({
 import {c} from "../components/constants.js";
 import { onMounted, onUnmounted } from 'vue'
 import {useEventHandler} from "./eventHandler.js";
-import lTab from "../components/lTab.vue";
+import lTab from "../components/iTab4.vue";
 import {ref} from 'vue';
 import Pager from "../components/Pager.vue";
 
@@ -47,7 +52,7 @@ if(typeof(props.config.value)=='function'){
 }
 const tableReload = ref(1);
 const rowStart = ref(0);
-const rowsToShow = ref(4);
+const rowsToShow = ref(props.config.selectSize);
 const pagerProps = ref({});
 pagerProps.value.name = 'pager';
 const pagerData = ref({});
@@ -55,6 +60,12 @@ const pagerData = ref({});
 const currentTableConfig = ref(props.config);
 currentTableConfig.value.rowStart = rowStart;
 currentTableConfig.value.rowsToShow = rowsToShow;
+
+pagerProps.value.currentPage = 0;
+pagerProps.value.totalPages = 16;
+pagerProps.value.name = 'field9';
+pagerProps.value.maxVisibleButtons = 3;
+pagerProps.value.perPage = 4;
 
 const handleCmd = function(args){
   console.log('handleCmd-', name, args);
@@ -87,6 +98,24 @@ funcs[c.SET_CMD_HANDLER]= function(evt){
 funcs[c.UNSET_CMD_HANDLER]= function(evt){
   console.log('in SET_CMD_HANDLER-', evt);
   let dlt = delete cmdHandlers[evt[2]];
+}
+funcs[c.FIRST_PAGE]=function(evt){
+  console.log('in FIRST_PAGE-', evt);
+}
+funcs[c.NEXT_PAGE]=function(evt){
+  console.log('in NEXT_PAGE-', evt);
+}
+funcs[c.PREV_PAGE]=function(evt){
+  console.log('in PREV_PAGE-', evt);
+}
+funcs[c.LAST_PAGE]=function(evt){
+  console.log('in LAST_PAGE-', evt);
+}
+funcs[c.THIS_PAGE]=function(evt){
+  console.log('in THIS_PAGE-', evt);
+}
+funcs[c.PAGE_CHANGED]=function(evt){
+  console.log('in PAGE_CHANGED-', evt);
 }
 
 onMounted(() => {

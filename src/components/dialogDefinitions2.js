@@ -37,6 +37,7 @@ const defs = function(dialogDef){
                 },
                 dialogFields :
                     [
+                        /*
                         {
                             name: 'field1',
                             type: 'inputText',
@@ -194,27 +195,39 @@ const defs = function(dialogDef){
                             name: 'field9',
                             type: 'listTable',
                             ref: 'field9',
-                            selectSize:'9',
+                            selectSize:'15',
                             startFocus: false,
+                            twhead: 'bg-blue-800 flex text-white w-full h-10',
+                            twheadtr: 'flex w-full mb-4',
+                            twbody: 'bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full',
+                            twtr:'flex w-full mb-4 hover:bg-green-400',
+                            testtwheadth:'py-2 pl-3.5 w-1/4',
+                            twtd:'flex w-full mb-4 hover:bg-green-400',
                             columns: [
                                 {
                                     field: 'id',
                                     label: 'ID',
                                     width: '10%',
                                     numeric: true,
-                                    visible: true
+                                    visible: true,
+                                    twtd:'w-full hover:bg-green-400 w-[20%] pl-[3%]',
+                                    twheadth:'py-2 pl-3.5 w-[10%]'
                                 },
                                 {
                                     field: 'menu_label',
                                     label: 'Name',
                                     width: '30%',
-                                    visible: true
+                                    visible: true,
+                                    twtd:'w-full hover:bg-green-400 w-[40%] pl-[3%]',
+                                    twheadth:'py-2 pl-3.5 w-[37%]'
                                 },
                                 {
                                     field: 'description',
                                     label: 'Description',
                                     width: '30%',
-                                    visible: true
+                                    visible: true,
+                                    twtd:'w-full mb-4 hover:bg-green-400 w-[50%]',
+                                    twheadth:'py-2 pl-3.5 pr-2  w-1/4'
 
                                 },
 
@@ -222,13 +235,17 @@ const defs = function(dialogDef){
                                     field: 'height',
                                     label: 'Height',
                                     width: '10%',
-                                    visible: false
+                                    visible: false,
+                                    twtd:'w-full mb-4 hover:bg-green-400',
+                                    twheadth:'py-2 pl-3.5 w-1/4'
                                 },
                                 {
                                     field: 'width',
                                     label: 'Width',
                                     width: '10%',
-                                    visible: false
+                                    visible: true,
+                                    twtd:'w-full mb-4 hover:bg-green-400',
+                                    twheadth:'py-2 w-1/4'
                                 }
                             ],
 
@@ -271,6 +288,7 @@ const defs = function(dialogDef){
                         {"id":6,"description":"Documents","menu_label":"Documents","height":15,"width":15},
                         {"id":7,"description":"tatement of Values","menu_label":"Values Page","height":15,"width":15},
                         {"id":8,"description":"The Basics","menu_label":"The Basics","height":15,"width":15},
+
 
 
                     ]

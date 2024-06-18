@@ -1,6 +1,6 @@
 <template>
-  <div :class = dialogAppearence.twstyle>
-    <div >
+  <span :class = dialogAppearence.twstyle>
+    <span >
       <component v-for="(aComponent, i) in dialogFields"
                  :key="i"
                  :config="dialogFields[i]"
@@ -9,8 +9,8 @@
                  :name="aComponent"
                  @cevt="handleEvent($event, funcs, emit)"
       />
-    </div>
-  </div>
+    </span>
+  </span>
 </template>
 
 <script setup>
