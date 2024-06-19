@@ -7,7 +7,7 @@
           :key="tableReload"
           @cevt="handleEvent($event, funcs, emit)"
       ></lTab>
-      <div><Pager
+      <div><Pager v-if="props.config.includePager==true"
           :config="pagerProps"
           :data = "pagerData"
           @cevt="handleEvent($event, funcs, emit)"
@@ -65,6 +65,8 @@ pagerProps.value.totalPages = 16;
 pagerProps.value.name = 'field9';
 pagerProps.value.maxVisibleButtons = 3;
 pagerProps.value.perPage = 4;
+pagerProps.value.buttonCss = props.config.pagerButtonCss;
+pagerProps.value.buttonCssActive = props.config.pagerButtonCssActive;
 
 const handleCmd = function(args){
   console.log('handleCmd-', name, args);

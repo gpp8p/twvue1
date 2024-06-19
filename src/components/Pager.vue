@@ -1,8 +1,8 @@
 <template>
-  <input type="button"  value="Click me">
   <ul class="pagination">
     <li class="pagination-item" v-if="!isInFirstPage">
       <button
+          :class="props.config.buttonCss"
           type="button"
           @click="onClickFirstPage"
           :disabled="isInFirstPage"
@@ -13,6 +13,7 @@
 
     <li class="pagination-item" v-if="!isInFirstPage">
       <button
+          :class="props.config.buttonCss"
           type="button"
           @click="onClickPreviousPage"
           :disabled="isInFirstPage"
@@ -29,10 +30,11 @@
         class="pagination-item"
     >
       <button
+
           type="button"
           @click="onClickPage(page.name)"
           :disabled="page.isDisabled"
-          :class="{ active: isPageActive(page.name) }"
+          :class="activePageCss(page.name)"
       >
         {{ page.name }}
       </button>
@@ -42,6 +44,7 @@
 
     <li class="pagination-item">
       <button
+          :class="props.config.buttonCss"
           type="button"
           @click="onClickNextPage"
           :disabled="isInLastPage"
@@ -52,6 +55,7 @@
 
     <li class="pagination-item">
       <button
+          :class="props.config.buttonCss"
           type="button"
           @click="onClickLastPage"
           :disabled="isInLastPage"
@@ -126,6 +130,7 @@ const isInLastPage = computed(() => {
   return props.config.currentPage === props.config.totalPages;
 })
 
+
 const startPage = computed(() => {
   if (pros.config.currentPage === 1) {
     return 1;
@@ -160,6 +165,14 @@ const pages = computed(() => {
 const isPageActive = function(page) {
   return props.config.currentPage === page;
 //      return this.currentPage === page+1;
+}
+
+const activePageCss = function(page) {
+  if(isPageActive(page)){
+    return props.config.buttonCssActive;
+  }else{
+    return props.config.buttonCss;
+  }
 }
 
 const onClickFirstPage = function(){

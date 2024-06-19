@@ -203,6 +203,9 @@ const defs = function(dialogDef){
                             twtr:'flex w-full mb-[1px] hover:bg-green-400',
                             testtwheadth:'py-2 pl-3.5 w-1/4',
                             twtd:'flex w-full mb-4 hover:bg-green-400',
+                            pagerButtonCss: "p-3 ml-1 text-white transition-colors duration-500 bg-blue-600 rounded hover:bg-blue-900",
+                            pagerButtonCssActive: "p-3 ml-1 text-white transition-colors duration-500 bg-blue-600 rounded hover:bg-red-900",
+                            includePager:true,
                             columns: [
                                 {
                                     field: 'id',

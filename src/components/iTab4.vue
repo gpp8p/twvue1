@@ -11,7 +11,7 @@
           </span>
         </tr>
       </thead>
-      <tbody :class="props.config.twbody" style="height: 50vh;">
+      <tbody :class="props.config.twbody" style="height: 20vh;">
          <tr :class="props.config.twtr" v-for="(row, rowIndex) in filteredData" :key="rowIndex" @click="rowSelected(rowIndex)">
            <span :class="cell.css" v-for="(cell, cellIndex) in row" :key="cellIndex">
             <td >
