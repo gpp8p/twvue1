@@ -39,7 +39,6 @@ import lTab from "../components/iTab4.vue";
 import {ref} from 'vue';
 import Pager from "../components/Pager.vue";
 
-
 const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
 const name = props.config.name;

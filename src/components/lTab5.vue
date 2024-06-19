@@ -1,31 +1,26 @@
 <template>
   <div>
     <h2>lTab here</h2>
-    <table class="text-left w-full">
-      <thead :class="props.config.twhead">
-        <tr :class="props.config.twheadtr">
-          <span :class="thisColumn.twheadth" v-for="(thisColumn, index) in props.config.columns"
+    <table class="styled-table">
+      <thead class="headerClass">
+        <tr>
+          <th :style="thisColumn.columnStyle" v-for="(thisColumn, index) in props.config.columns"
               :key="index"
           >
-            <th   v-if="thisColumn.visible">{{thisColumn.label}}</th>
-          </span>
+            <span  v-if="thisColumn.visible">{{thisColumn.label}}</span>
+          </th>
         </tr>
       </thead>
-      <tbody :class="props.config.twbody" style="height: 50vh;">
-         <tr :class="props.config.twtr" v-for="(row, rowIndex) in filteredData" :key="rowIndex" @click="rowSelected(rowIndex)">
-           <span :class="cell.css" v-for="(cell, cellIndex) in row" :key="cellIndex">
-            <td >
-              {{ cell.value }}
+      <tbody>
+         <tr v-for="(row, rowIndex) in filteredData" :key="rowIndex" @click="rowSelected(rowIndex)">
+            <td v-for="(cell, cellIndex) in row" :key="cellIndex">
+              {{ cell }}
             </td>
-           </span>
-
           </tr>
       </tbody>
     </table>
   </div>
 </template>
-
-
 
 <script setup>
 
@@ -55,7 +50,6 @@ const funcs = [];
 const cmdHandlers = {}
 
 const fieldValue = ref('');
-console.log("twhead-", props.config.twhead);
 if(typeof(props.config.value)=='function'){
   fieldValue.value = props.config.value(props.data);
 }
@@ -71,11 +65,11 @@ for(var r = props.config.rowStart; r<(props.config.rowStart+props.config.rowsToS
     debugger;
     var filteredCell= {
       value:fieldValue.value[r][props.config.columns[cols].field],
-      css: props.config.columns[cols].twtd,
+      css: props.config.columns[cols].twheadth,
     }
+    console.log('filteredCell-', filteredCell);
     if(props.config.columns[cols].visible){
-//      filteredRow.push(fieldValue.value[r][props.config.columns[cols].field]);
-      filteredRow.push(filteredCell);
+      filteredRow.push(fieldValue.value[r][props.config.columns[cols].field]);
     }
   }
   console.log('filteredRow', filteredRow);
@@ -134,6 +128,7 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: 20% 40%;
 }
+
 
 .styled-table {
   border: 2px;
