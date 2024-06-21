@@ -109,6 +109,7 @@ funcs[c.FIELD_CHANGED]= function(evt){
   dialogData[evt[1]]=evt[2];
 }
 
+
 onMounted(() => {
 //  debugger;
   emit('cevt', [c.SET_CMD_HANDLER, handleCmd, name]);

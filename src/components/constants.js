@@ -11,6 +11,7 @@ export const c = {
     FIELD_CHANGED:10,
     SAVE_DIALOG_DATA:11,
     FIELD_INITIALIZED:12,
+    LOADERS_AVAILABLE:13,
 
 
 
@@ -34,6 +35,7 @@ export const c = {
     LAST_PAGE: 1033,
     THIS_PAGE: 1034,
     PAGE_CHANGED: 1035,
+    ALL_PAGES:  1036,
 
     CMD_SET_MENU: 1200,
     CMD_SET_MESSAGE: 1201,

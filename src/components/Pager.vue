@@ -176,23 +176,29 @@ const activePageCss = function(page) {
 }
 
 const onClickFirstPage = function(){
+  console.log('first page');
   emit('cevt',[c.FIRST_PAGE]);
 }
 
 const onClickPreviousPage = function(){
+  console.log('previous page');
   emit('cevt',[c.PREV_PAGE]);
 }
 
 const onClickPage = function(page){
+  console.log('this page');
   emit('cevt',[c.THIS_PAGE, page]);
 }
 
 const onClickNextPage = function(){
+  console.log('next page');
   emit('cevt',[c.NEXT_PAGE, props.config.currentPage + 1]);
 }
 const onClickLastPage = function(){
-  emit(c.PAGE_CHANGED, this.totalPages);
-  emit('cevt',[c.LAST_PAGE, this.totalPages]);
+  console.log('last page');
+
+  emit('cevt',[c.PAGE_CHANGED, props.config.totalPages]);
+  emit('cevt',[c.LAST_PAGE, props.config.totalPages]);
 }
 
 funcs[c.SET_CMD_HANDLER]= function(evt){

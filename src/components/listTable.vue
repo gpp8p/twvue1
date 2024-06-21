@@ -38,6 +38,7 @@ import {useEventHandler} from "./eventHandler.js";
 import lTab from "../components/iTab4.vue";
 import {ref} from 'vue';
 import Pager from "../components/Pager.vue";
+import { watch } from 'vue'
 
 const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
@@ -46,9 +47,21 @@ const funcs = [];
 const cmdHandlers = {}
 
 const fieldValue = ref('');
+const loaderFunctions = ref({});
+const loaderFunctionsReady = ref(false);
+
 if(typeof(props.config.value)=='function'){
-  fieldValue.value = props.config.value(props.data);
+  fieldValue.value = props.config.value(props.data, loaderFunctions, loaderFunctionsReady);
 }
+watch(
+    () => loaderFunctionsReady.value,
+    (newValue) => {
+      console.log('loaderFunctionsReady', newValue);
+      console.log('loaders:', loaderFunctions.value);
+    }
+)
+console.log('loaderFunctions',loaderFunctions.value);
+//fieldValue.value = loaderFunctions.value.readAllData(props.data);
 const tableReload = ref(1);
 const rowStart = ref(0);
 const rowsToShow = ref(props.config.selectSize);
@@ -61,7 +74,7 @@ currentTableConfig.value.rowStart = rowStart;
 currentTableConfig.value.rowsToShow = rowsToShow;
 
 pagerProps.value.currentPage = 0;
-pagerProps.value.totalPages = 16;
+pagerProps.value.totalPages =4;
 pagerProps.value.name = 'field9';
 pagerProps.value.maxVisibleButtons = 3;
 pagerProps.value.perPage = 4;
@@ -117,6 +130,9 @@ funcs[c.THIS_PAGE]=function(evt){
 }
 funcs[c.PAGE_CHANGED]=function(evt){
   console.log('in PAGE_CHANGED-', evt);
+}
+funcs[c.LOADERS_AVAILABLE]=function(evt){
+  console.log('in LOADERS_AVAILABLE in listTable-', evt);
 }
 
 onMounted(() => {

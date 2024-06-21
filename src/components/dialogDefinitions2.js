@@ -1,5 +1,7 @@
 import {c} from "../components/constants.js";
 
+
+
 export function getDialogDefinitions(){
     const getDialogAppearence = function(dialogDef){
         var currentDefs = defs(dialogDef);
@@ -203,8 +205,8 @@ const defs = function(dialogDef){
                             twtr:'flex w-full mb-[1px] hover:bg-green-400',
                             testtwheadth:'py-2 pl-3.5 w-1/4',
                             twtd:'flex w-full mb-4 hover:bg-green-400',
-                            pagerButtonCss: "p-3 ml-1 text-white transition-colors duration-500 bg-blue-600 rounded hover:bg-blue-900",
-                            pagerButtonCssActive: "p-3 ml-1 text-white transition-colors duration-500 bg-blue-600 rounded hover:bg-red-900",
+                            pagerButtonCss:"mr-[3px] mt-[10px] px-3 py-1 text-xs font-medium text-center text-black bg-white rounded-lg active:bg-red-400",
+                            pagerButtonCssActive:"mr-[3px] mt-[10px] px-3 py-1 text-xs font-medium text-center text-black bg-blue-300 rounded-lg active:bg-red-400",
                             includePager:true,
                             columns: [
                                 {
@@ -245,8 +247,26 @@ const defs = function(dialogDef){
                                 }
                             ],
 
-                            value: function(existingData){
-                                debugger;
+                            value: function(existingData, loaders, loaderFunctionsReady){
+                                async function loadModule() {
+                                    const targetModule = './defaultData.js';
+                                    try {
+                                        const myModule = await import(targetModule);
+                                        console.log('successful module import');
+                                        const {readAllData, getCapabilities, readNext, readPrev, readFirst, readLast, readThisRecord} = myModule.getDataSource();
+                                        console.log('readAllData-', readAllData);
+
+                                        loaders.value = {
+                                            funcReadAllData: readAllData,
+                                            funcGetCapabilities: getCapabilities
+                                        }
+                                        loaderFunctionsReady.value=true;
+                                        debugger;
+                                    } catch (error) {
+                                        console.error('Error importing module:', error);
+                                    }
+                                }
+                                loadModule();
                                 return existingData.field9;
                             },
                             label: "Field 9"

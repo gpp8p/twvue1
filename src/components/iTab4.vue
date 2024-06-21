@@ -11,7 +11,7 @@
           </span>
         </tr>
       </thead>
-      <tbody :class="props.config.twbody" style="height: 20vh;">
+      <tbody :class="props.config.twbody" style="height: 30vh;">
          <tr :class="props.config.twtr" v-for="(row, rowIndex) in filteredData" :key="rowIndex" @click="rowSelected(rowIndex)">
            <span :class="cell.css" v-for="(cell, cellIndex) in row" :key="cellIndex">
             <td >
@@ -68,7 +68,7 @@ for(var r = props.config.rowStart; r<(props.config.rowStart+props.config.rowsToS
   for(var cols = 0; cols< props.config.columns.length; cols++){
     console.log('cols--', props.config.columns[cols].field);
     console.log('field content-',fieldValue.value[r][props.config.columns[cols].field]);
-    debugger;
+//    debugger;
     var filteredCell= {
       value:fieldValue.value[r][props.config.columns[cols].field],
       css: props.config.columns[cols].twtd,
