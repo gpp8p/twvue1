@@ -1,8 +1,13 @@
 import { ref } from 'vue';
+import { isProxy, toRaw } from 'vue';
 
 export function getDataSource(){
     const readAllData=function(existingData){
-        return existingData;
+        console.log('returning this-',toRaw(existingData))
+        return toRaw(existingData);
+    }
+    const getRecordCount=function(existingData){
+        return existingData.length;
     }
     const getCapabilities=function(){
         return {
@@ -13,24 +18,46 @@ export function getDataSource(){
             readThisRecord: true,
             updateThisRecord: false,
             updateAll: false,
+            recordCount: true
         }
     }
-    const readNext = function(){
+    const readNext = function(existingData, limit, offset){
+        debugger;
+        console.log('offset-',offset);
+        console.log('limit-', limit);
         console.log('defaultData readNext');
+        console.log('slicing offset, offset+limit', offset, offset+limit);
+        var start = offset;
+        var end = offset + limit;
+        console.log('slice-',existingData.slice(start, end));
+        return existingData.slice(start, end);
     }
-    const readPrev = function(){
+    const readPrev = function(existingData, limit, offset){
         console.log('defaultData readPrev');
+        var start = offset-limit;
+        var end = start + limit;
+        console.log('slice-',existingData.slice(start, end));
+        return existingData.slice(start, end);
     }
-    const readFirst = function(){
-        console.log('defaultData readFirst');
+    const readFirst = function(existingData, limit, offset){
+        debugger;
+        console.log('offset-',offset);
+        console.log('limit-', limit);
+        console.log('slice-',existingData.slice(offset, offset+limit));
+        console.log('slice4', existingData.slice(offset, limit));
+        offset =0;
+        return existingData.slice(offset, offset+limit);
     }
-    const readLast = function(){
+    const readLast = function(existingData, limit, offset){
+        debugger;
         console.log('defaultData readLast');
+        console.log('slice4 readlast', existingData.slice(offset, limit));
+        return existingData.slice(offset, offset+limit);
     }
     const readThisRecord = function(){
         console.log('defaultData readThisRecord');
     }
     debugger;
-    return {readAllData, getCapabilities, readNext, readPrev, readFirst, readLast, readThisRecord};
+    return {readAllData, getCapabilities, readNext, readPrev, readFirst, readLast, readThisRecord, getRecordCount};
 
 }

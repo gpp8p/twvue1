@@ -253,12 +253,18 @@ const defs = function(dialogDef){
                                     try {
                                         const myModule = await import(targetModule);
                                         console.log('successful module import');
-                                        const {readAllData, getCapabilities, readNext, readPrev, readFirst, readLast, readThisRecord} = myModule.getDataSource();
+                                        const {readAllData, getCapabilities, readNext, readPrev, readFirst, readLast, readThisRecord, getRecordCount} = myModule.getDataSource();
                                         console.log('readAllData-', readAllData);
 
                                         loaders.value = {
                                             funcReadAllData: readAllData,
-                                            funcGetCapabilities: getCapabilities
+                                            funcGetCapabilities: getCapabilities,
+                                            funcReadNext: readNext,
+                                            funcReadPrev: readPrev,
+                                            funcReadFirst: readFirst,
+                                            funcReadLast: readLast,
+                                            funcReadThisRecord: readThisRecord,
+                                            funcGetRecordCount: getRecordCount
                                         }
                                         loaderFunctionsReady.value=true;
                                         debugger;
@@ -296,14 +302,14 @@ const defs = function(dialogDef){
                         {"id":6,"description":"Documents","menu_label":"Documents","height":15,"width":15},
                         {"id":7,"description":"tatement of Values","menu_label":"Values Page","height":15,"width":15},
                         {"id":8,"description":"The Basics","menu_label":"The Basics","height":15,"width":15},
-                        {"id":1,"description":"created in insert 1229","menu_label":"insert create 1229","height":15,"width":15},
-                        {"id":2,"description":"Default Template","menu_label":"Default Template","height":15,"width":15},
-                        {"id":3,"description":"Land","menu_label":"Land","height":15,"width":15},
-                        {"id":4,"description":"People","menu_label":"People","height":15,"width":15},
-                        {"id":5,"description":"Our Setup","menu_label":"Our Setup","height":15,"width":15},
-                        {"id":6,"description":"Documents","menu_label":"Documents","height":15,"width":15},
-                        {"id":7,"description":"tatement of Values","menu_label":"Values Page","height":15,"width":15},
-                        {"id":8,"description":"The Basics","menu_label":"The Basics","height":15,"width":15},
+                        {"id":9,"description":"created in insert 1229","menu_label":"insert create 1229","height":15,"width":15},
+                        {"id":10,"description":"Default Template","menu_label":"Default Template","height":15,"width":15},
+                        {"id":11,"description":"Land","menu_label":"Land","height":15,"width":15},
+                        {"id":12,"description":"People","menu_label":"People","height":15,"width":15},
+                        {"id":13,"description":"Our Setup","menu_label":"Our Setup","height":15,"width":15},
+                        {"id":14,"description":"Documents","menu_label":"Documents","height":15,"width":15},
+                        {"id":15,"description":"tatement of Values","menu_label":"Values Page","height":15,"width":15},
+                        {"id":16,"description":"The Basics","menu_label":"The Basics","height":15,"width":15},
 
 
 

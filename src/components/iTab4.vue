@@ -56,17 +56,22 @@ const cmdHandlers = {}
 
 const fieldValue = ref('');
 console.log("twhead-", props.config.twhead);
-if(typeof(props.config.value)=='function'){
-  fieldValue.value = props.config.value(props.data);
-}
+//if(typeof(props.config.value)=='function'){
+//  fieldValue.value = props.config.value(props.data);
+//}
+fieldValue.value = props.data;
 console.log('columns--', props.config.columns);
+console.log('props.data', props.data);
+console.log('fieldValue.value', fieldValue.value);
 const filteredData = ref([]);
-//console.log('fieldValue--', fieldValue.value.length);
+console.log('fieldValue--', fieldValue.value.length);
+debugger;
 for(var r = props.config.rowStart; r<(props.config.rowStart+props.config.rowsToShow); ++r){
 //  console.log('this field-',fieldValue.value[r]);
   var filteredRow = [];
   for(var cols = 0; cols< props.config.columns.length; cols++){
     console.log('cols--', props.config.columns[cols].field);
+    console.log('fieldValue--', fieldValue.value);
     console.log('field content-',fieldValue.value[r][props.config.columns[cols].field]);
 //    debugger;
     var filteredCell= {
