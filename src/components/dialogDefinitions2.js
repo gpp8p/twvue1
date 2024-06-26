@@ -8,7 +8,7 @@ export function getDialogDefinitions(){
         return currentDefs.dialogAppearence;
     }
     const getDialogFields = function(dialogDef){
-        debugger;
+//        debugger;
         var currentDefs = defs(dialogDef);
         return currentDefs.dialogFields;
     }
@@ -197,7 +197,7 @@ const defs = function(dialogDef){
                             name: 'field9',
                             type: 'listTable',
                             ref: 'field9',
-                            selectSize:'15',
+                            selectSize:'4',
                             startFocus: false,
                             twhead: 'bg-blue-800 flex text-white w-full h-10',
                             twheadtr: 'flex w-full mb-4',
@@ -267,7 +267,7 @@ const defs = function(dialogDef){
                                             funcGetRecordCount: getRecordCount
                                         }
                                         loaderFunctionsReady.value=true;
-                                        debugger;
+//                                        debugger;
                                     } catch (error) {
                                         console.error('Error importing module:', error);
                                     }

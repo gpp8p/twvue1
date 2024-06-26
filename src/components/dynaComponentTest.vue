@@ -34,7 +34,7 @@ import vtextarea from "../components/vtextarea.vue"
 import listTable from "../components/listTable.vue";
 
 
-debugger;
+//debugger;
 import {getDialogDefinitions} from "../components/dialogDefinitions2.js";
 
 

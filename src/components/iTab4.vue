@@ -66,12 +66,15 @@ console.log('fieldValue.value', fieldValue.value);
 const filteredData = ref([]);
 console.log('fieldValue--', fieldValue.value.length);
 debugger;
-for(var r = props.config.rowStart; r<(props.config.rowStart+props.config.rowsToShow); ++r){
+console.log('props.config.rowStart', props.config.rowStart);
+console.log('props.config.rowsToShow', props.config.rowsToShow);
+for(var r = props.config.rowStart; r<(props.config.rowStart+props.config.rowsToShow); r++){
 //  console.log('this field-',fieldValue.value[r]);
   var filteredRow = [];
   for(var cols = 0; cols< props.config.columns.length; cols++){
     console.log('cols--', props.config.columns[cols].field);
     console.log('fieldValue--', fieldValue.value);
+    console.log('fieldValue.value[r]', fieldValue.value[r], r);
     console.log('field content-',fieldValue.value[r][props.config.columns[cols].field]);
 //    debugger;
     var filteredCell= {
