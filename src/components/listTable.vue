@@ -88,7 +88,7 @@ pagerProps.value.name = 'pager';
 const pagerData = ref({});
 const currentRowPointer = ref(0);
 
-pagerProps.value.currentPage = 0;
+pagerProps.value.currentPage = 1;
 pagerProps.value.totalPages =4;
 pagerProps.value.name = 'field9';
 pagerProps.value.maxVisibleButtons = 3;
@@ -148,15 +148,19 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
 }
 funcs[c.FIRST_PAGE]=function(evt){
   console.log('in FIRST_PAGE-', evt);
+  console.log('currentRowPointer', currentRowPointer.value);
   dataToShow.value = loaderFunctions.value.funcReadFirst(props.data[props.config.name], pagerProps.value.perPage, currentRowPointer.value);
   currentTableConfig.value.rowStart = 0;
   currentTableConfig.value.rowsToShow = pagerProps.value.perPage;
   console.log('dataToShow---',dataToShow.value);
   currentRowPointer.value = currentRowPointer.value+currentTableConfig.value.rowsToShow;
+  pagerProps.value.currentPage=1;
   tableReload.value+=1;
 }
 funcs[c.NEXT_PAGE]=function(evt){
   console.log('in NEXT_PAGE-', evt);
+  console.log('currentTableConfig.value.pageAt', currentTableConfig.value.pageAt);
+  console.log('currentTableConfig.value.totalPages', currentTableConfig.value.totalPages);
   debugger;
   if(currentTableConfig.value.pageAt!=currentTableConfig.value.totalPages)
   {
@@ -166,6 +170,7 @@ funcs[c.NEXT_PAGE]=function(evt){
     console.log('dataToShow---', dataToShow.value);
     currentRowPointer.value = currentRowPointer.value + currentTableConfig.value.rowsToShow;
     currentTableConfig.value.pageAt = currentTableConfig.value.pageAt + 1;
+    pagerProps.value.currentPage+=1;
     tableReload.value += 1;
   }else{
     alert('End of data reached');
@@ -180,7 +185,7 @@ funcs[c.PREV_PAGE]=function(evt){
     currentTableConfig.value.pageAt = currentTableConfig.value.pageAt-1;
     currentTableConfig.value.rowStart = 0;
     currentTableConfig.value.rowsToShow = pagerProps.value.perPage;
-
+    pagerProps.value.currentPage-=1;
     tableReload.value+=1;
   }else{
     alert('Begining of data reached');
@@ -195,6 +200,7 @@ funcs[c.LAST_PAGE]=function(evt){
   currentTableConfig.value.rowStart = 0;
   currentTableConfig.value.rowsToShow = pagerProps.value.perPage;
   currentRowPointer.value=currentTableConfig.value.spacesCount;
+  pagerProps.value.currentPage=currentTableConfig.value.totalPages;
   tableReload.value+=1;
 }
 funcs[c.THIS_PAGE]=function(evt){

@@ -67,7 +67,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
   config: {
     type: Object,
@@ -132,7 +131,7 @@ const isInLastPage = computed(() => {
 
 
 const startPage = computed(() => {
-  if (pros.config.currentPage === 1) {
+  if (props.config.currentPage === 1) {
     return 1;
   }
 
@@ -147,10 +146,10 @@ const startPage = computed(() => {
 })
 const pages = computed(() => {
   const range = [];
-
+  debugger;
   for (
-      let i = startPage;
-      i <= Math.min(startPage + props.config.maxVisibleButtons - 1, props.config.totalPages);
+      let i = startPage.value;
+      i <= Math.min(startPage.value + props.config.maxVisibleButtons - 1, props.config.totalPages);
       i++
   ) {
     range.push({
