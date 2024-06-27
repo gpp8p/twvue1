@@ -74,7 +74,7 @@ for(var r = props.config.rowStart; r<(props.config.rowStart+props.config.rowsToS
   for(var cols = 0; cols< props.config.columns.length; cols++){
     console.log('cols--', props.config.columns[cols].field);
     console.log('fieldValue--', fieldValue.value);
-    console.log('fieldValue.value[r]', fieldValue.value[r], r);
+    console.log('fieldValue.value[r]', fieldValue.value[r], r, props.config.rowStart, props.config.rowStart+props.config.rowsToShow);
     console.log('field content-',fieldValue.value[r][props.config.columns[cols].field]);
 //    debugger;
     var filteredCell= {

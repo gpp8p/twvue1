@@ -47,7 +47,7 @@
           :class="props.config.buttonCss"
           type="button"
           @click="onClickNextPage"
-          :disabled="isInLastPage"
+
       >
         Next
       </button>
@@ -191,6 +191,7 @@ const onClickPage = function(page){
 
 const onClickNextPage = function(){
   console.log('next page');
+  debugger;
   emit('cevt',[c.NEXT_PAGE, props.config.currentPage + 1]);
 }
 const onClickLastPage = function(){

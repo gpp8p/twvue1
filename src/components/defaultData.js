@@ -34,10 +34,12 @@ export function getDataSource(){
     }
     const readPrev = function(existingData, limit, offset){
         console.log('defaultData readPrev');
-        var start = offset-limit;
+        var start = offset;
         var end = start + limit;
         console.log('slice-',existingData.slice(start, end));
         return existingData.slice(start, end);
+
+
     }
     const readFirst = function(existingData, limit, offset){
         debugger;
@@ -54,8 +56,12 @@ export function getDataSource(){
         console.log('slice4 readlast', existingData.slice(offset, limit));
         return existingData.slice(offset, offset+limit);
     }
-    const readThisRecord = function(){
+    const readThisRecord = function(existingData, limit, offset){
         console.log('defaultData readThisRecord');
+        var start = offset;
+        var end = start + limit;
+        console.log('slice-',existingData.slice(start, end));
+        return existingData.slice(start, end);
     }
     debugger;
     return {readAllData, getCapabilities, readNext, readPrev, readFirst, readLast, readThisRecord, getRecordCount};
