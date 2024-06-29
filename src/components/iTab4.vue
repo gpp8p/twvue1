@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>lTab here</h2>
     <table class="text-left w-full">
       <thead :class="props.config.twhead">
         <tr :class="props.config.twheadtr">

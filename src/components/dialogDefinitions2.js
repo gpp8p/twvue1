@@ -5,10 +5,11 @@ import {c} from "../components/constants.js";
 export function getDialogDefinitions(){
     const getDialogAppearence = function(dialogDef){
         var currentDefs = defs(dialogDef);
+//        debugger;
         return currentDefs.dialogAppearence;
     }
     const getDialogFields = function(dialogDef){
-//        debugger;
+        debugger;
         var currentDefs = defs(dialogDef);
         return currentDefs.dialogFields;
     }
@@ -202,7 +203,7 @@ const defs = function(dialogDef){
                             twhead: 'bg-blue-800 flex text-white w-full h-10',
                             twheadtr: 'flex w-full mb-4',
                             twbody: 'bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full',
-                            twtr:'flex w-full mb-[1px] hover:bg-green-400',
+                            twtr:'flex w-full mb-[1px] hover:bg-green-400 text-xs',
                             testtwheadth:'py-2 pl-3.5 w-1/4',
                             twtd:'flex w-full mb-4 hover:bg-green-400',
                             pagerButtonCss:"mr-[3px] mt-[10px] px-3 py-1 text-xs font-medium text-center text-black bg-white rounded-lg active:bg-red-400",
@@ -317,5 +318,41 @@ const defs = function(dialogDef){
                 }
             }
         }
+        case 'loginDialog':{
+            return {
+                dialogAppearence: {
+                    twPrompt: 'text-lg text-current ml-[30%] my-[5%]',
+                    prompt: 'Please Log In...',
+                    twstyle:"fixed w-[50%] h-[40%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
+                    menuOpts:"loginMenu",
+
+                },
+                dialogFields : [
+                    {
+                        type:'inputText',
+                        name: 'userId',
+                        fieldSize: 30,
+                        label: 'User Id:',
+                        required: true,
+                        initialFocus: true,
+                        labelStyle:'text-sm text-blue-500 mr-[10%]',
+                        tailwindStyle:'text-sm my-0.5 outline-blue-500 rounded focus:outline-2 focus:outline-blue-500 hover:outline-2 hover:outline-red-500 rounded'
+                    },
+                    {
+                        type: 'htmlPasswordInput',
+                        name: 'password',
+                        label: 'Password:',
+                        labelStyle: 'text-sm text-blue-500 mr-[10%]',
+                        fieldSize: 30,
+                        tailwindStyle:'text-sm my-0.5 outline-blue-500 rounded focus:outline-2 focus:outline-blue-500 hover:outline-2 hover:outline-red-500 rounded',
+                        initialFocus: false,
+                    }
+                ],
+                defaultData:{},
+            }
+        }
+
+
+
     }
 }

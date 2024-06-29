@@ -70,14 +70,21 @@ watch(
       console.log('dataToShow',dataToShow.value);
       tableReload.value+=1;
 */
-      dataToShow.value = loaderFunctions.value.funcReadFirst(props.data[props.config.name], pagerProps.value.perPage, currentRowPointer.value);
-      currentTableConfig.value.rowStart = 0;
-      currentTableConfig.value.rowsToShow = pagerProps.value.perPage;
-      console.log('dataToShow---',dataToShow.value);
-      console.log('currentTableConfig.value.pageAt', currentTableConfig.value.pageAt);
-      console.log('currentTableConfig.value.totalPages', currentTableConfig.value.totalPages);
+      if(currentTableConfig.value.includePager){
+        dataToShow.value = loaderFunctions.value.funcReadFirst(props.data[props.config.name], pagerProps.value.perPage, currentRowPointer.value);
+        currentTableConfig.value.rowStart = 0;
+        currentTableConfig.value.rowsToShow = pagerProps.value.perPage;
+        console.log('dataToShow---',dataToShow.value);
+        console.log('currentTableConfig.value.pageAt', currentTableConfig.value.pageAt);
+        console.log('currentTableConfig.value.totalPages', currentTableConfig.value.totalPages);
 //      currentRowPointer.value = currentRowPointer.value+currentTableConfig.value.rowsToShow;
-      currentRowPointer.value = 0;
+        currentRowPointer.value = 0;
+      }else{
+        dataToShow.value = loaderFunctions.value.funcReadAllData(props.data[props.config.name]);
+        currentTableConfig.value.rowsToShow=dataToShow.value.length;
+        tableReload.value+=1;
+      }
+
     }
 )
 console.log('loaderFunctions',loaderFunctions.value);
@@ -214,7 +221,7 @@ funcs[c.LAST_PAGE]=function(evt){
   dataToShow.value = loaderFunctions.value.funcReadLast(props.data[props.config.name], pagerProps.value.perPage, currentRowPointer.value);
   currentTableConfig.value.rowStart = 0;
   currentTableConfig.value.rowsToShow = pagerProps.value.perPage;
-  currentRowPointer.value=currentTableConfig.value.spacesCount;
+//  currentRowPointer.value=currentTableConfig.value.spacesCount;
   pagerProps.value.currentPage=currentTableConfig.value.totalPages;
   tableReload.value+=1;
 }

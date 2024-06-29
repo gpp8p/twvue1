@@ -32,6 +32,7 @@ import radioGroup from "../components/radioGroup.vue";
 import vselect from "../components/vselect.vue";
 import vtextarea from "../components/vtextarea.vue"
 import listTable from "../components/listTable.vue";
+import htmlPasswordInput from '../components/htmlPasswordInput.vue';
 
 
 //debugger;
@@ -39,10 +40,10 @@ import {getDialogDefinitions} from "../components/dialogDefinitions2.js";
 
 
 const {getDialogAppearence, getDialogFields, getDefaultData} = getDialogDefinitions();
-const dialogFields = getDialogFields('testDialog');
+const dialogFields = getDialogFields('loginDialog');
 console.log('dialogFields-',dialogFields);
 
-const dialogAppearence = getDialogAppearence('testDialog');
+const dialogAppearence = getDialogAppearence('loginDialog');
 
 
 const {handleEvent} = useEventHandler();
@@ -85,7 +86,8 @@ const morphs = {
   radioGroup,
   vselect,
   vtextarea,
-  listTable
+  listTable,
+  htmlPasswordInput
 }
 
 
