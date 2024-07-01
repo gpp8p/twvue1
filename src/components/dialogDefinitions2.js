@@ -21,7 +21,11 @@ export function getDialogDefinitions(){
         var currentDefs = defs(dialogDef);
         return currentDefs.menuDefs;
     }
-    return {getDialogAppearence, getDialogFields, getDefaultData, getMenuDefinitions}
+    const getActions = function(dialogDef){
+        var currentDefs = defs(dialogDef);
+        return currentDefs.addActions
+    }
+    return {getDialogAppearence, getDialogFields, getDefaultData, getMenuDefinitions, getActions}
 }
 /*
 const existingData = {
@@ -320,7 +324,8 @@ const defs = function(dialogDef){
 
                     ]
                 },
-                menuDefs:{}
+                menuDefs:{},
+                actions:function(currentFuncs){}
             }
         }
         case 'loginDialog':{
@@ -360,6 +365,12 @@ const defs = function(dialogDef){
                         { type: 'menuItem', config: { label: 'Login', actionCode: c.MENU_LOGIN } },
                         { type: 'menuItem', config: { label: 'Cancel', actionCode: c.MENU_CANCEL_LOGIN } },
                     ],
+                },
+                addActions:function(currentFuncs){
+                    currentFuncs[c.EXIT_DIALOG]=function(){
+                        console.log('new func exit dialog')
+                    }
+                    //return currentFuncs;
                 }
             }
         }

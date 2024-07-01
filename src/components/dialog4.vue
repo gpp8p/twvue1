@@ -35,22 +35,24 @@ import listTable from "../components/listTable.vue";
 import htmlPasswordInput from '../components/htmlPasswordInput.vue';
 
 
-//debugger;
+debugger;
 import {getDialogDefinitions} from "../components/dialogDefinitions2.js";
 
 
-const {getDialogAppearence, getDialogFields, getDefaultData, getMenuDefinitions} = getDialogDefinitions();
+const {getDialogAppearence, getDialogFields, getDefaultData, getMenuDefinitions, getActions} = getDialogDefinitions();
 const dialogFields = getDialogFields('loginDialog');
 console.log('dialogFields-',dialogFields);
 
 const dialogAppearence = getDialogAppearence('loginDialog');
 const menuDefinitions = getMenuDefinitions('loginDialog');
+const addActions = getActions('loginDialog');
 
 
 const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
 const name = 'dialog'
 const funcs = [];
+const existingFuncs = [];
 const cmdHandlers = {}
 
 const handleCmd = function(args){
@@ -111,10 +113,13 @@ funcs[c.FIELD_CHANGED]= function(evt){
   console.log('in c.FIELD_CHANGED-', evt);
   dialogData[evt[1]]=evt[2];
 }
+debugger;
+addActions(funcs);
+/*
 funcs[c.MENU_ITEM_SELECTED] = function(evt){
   console.log('menu item selected', evt);
 }
-
+*/
 
 onMounted(() => {
 //  debugger;
