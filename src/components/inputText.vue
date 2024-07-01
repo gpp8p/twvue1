@@ -1,6 +1,6 @@
 <template>
   <div class="inputCss">
-      <span>{{props.config.label}}</span>
+      <label v-if="config.label" :class="config.labelStyle || 'text-xl text-blue-500'">{{ config.label }}</label>
       <span>
         <input type="text"
                :class="props.config.tailwindStyle || 'text-lg outline outline-2 outline-blue-500 focus:outline-red-500 hover:outline-red-500 rounded'"

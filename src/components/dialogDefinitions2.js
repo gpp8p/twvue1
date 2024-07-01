@@ -17,7 +17,11 @@ export function getDialogDefinitions(){
         var currentDefs = defs(dialogDef);
         return currentDefs.defaultData;
     }
-    return {getDialogAppearence, getDialogFields, getDefaultData}
+    const getMenuDefinitions = function(dialogDef){
+        var currentDefs = defs(dialogDef);
+        return currentDefs.menuDefs;
+    }
+    return {getDialogAppearence, getDialogFields, getDefaultData, getMenuDefinitions}
 }
 /*
 const existingData = {
@@ -315,7 +319,8 @@ const defs = function(dialogDef){
 
 
                     ]
-                }
+                },
+                menuDefs:{}
             }
         }
         case 'loginDialog':{
@@ -323,7 +328,7 @@ const defs = function(dialogDef){
                 dialogAppearence: {
                     twPrompt: 'text-lg text-current ml-[30%] my-[5%]',
                     prompt: 'Please Log In...',
-                    twstyle:"fixed w-[50%] h-[40%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black",
+                    twstyle:"fixed w-[50%] h-[40%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded border-2 border-blue-500 shadow-xl shadow-black pl-[5%] pt-[5%]",
                     menuOpts:"loginMenu",
 
                 },
@@ -334,7 +339,7 @@ const defs = function(dialogDef){
                         fieldSize: 30,
                         label: 'User Id:',
                         required: true,
-                        initialFocus: true,
+                        startFocus: true,
                         labelStyle:'text-sm text-blue-500 mr-[10%]',
                         tailwindStyle:'text-sm my-0.5 outline-blue-500 rounded focus:outline-2 focus:outline-blue-500 hover:outline-2 hover:outline-red-500 rounded'
                     },
@@ -345,10 +350,17 @@ const defs = function(dialogDef){
                         labelStyle: 'text-sm text-blue-500 mr-[10%]',
                         fieldSize: 30,
                         tailwindStyle:'text-sm my-0.5 outline-blue-500 rounded focus:outline-2 focus:outline-blue-500 hover:outline-2 hover:outline-red-500 rounded',
-                        initialFocus: false,
+                        startFocus: false,
                     }
                 ],
                 defaultData:{},
+                menuDefs:{
+                    twStyling:'text-xs text-blue-500 w-[40%]',
+                    items: [
+                        { type: 'menuItem', config: { label: 'Login', actionCode: c.MENU_LOGIN } },
+                        { type: 'menuItem', config: { label: 'Cancel', actionCode: c.MENU_CANCEL_LOGIN } },
+                    ],
+                }
             }
         }
 
