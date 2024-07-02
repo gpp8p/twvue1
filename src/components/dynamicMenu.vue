@@ -8,7 +8,7 @@
           :key="index"
           :is="item.type"
           :config="item.config"
-          @input="handleInput"
+          @cevt="handleInput"
       ></component>
     </div>
 
@@ -20,10 +20,12 @@
 <script>
 import { defineComponent } from 'vue';
 import {ref} from 'vue';
-import menuItem from './menuItem.vue';
+import menuItem from './menuItem1.vue';
 //import htmlTextInput from './htmlTextInput.vue';
 import menuItemDrop from '../components//menuItemDrop.vue';
 import {c} from "./constants";
+import {useEventHandler} from "./eventHandler.js";
+const {handleEvent} = useEventHandler();
 
 
 export default defineComponent({
@@ -45,7 +47,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const handleInput = (data) => {
       debugger;
-      emit('cevt', [data]);
+      emit('cevt', [c.MENU_ITEM_SELECTED, data[1]]);
     };
 
     return {

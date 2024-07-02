@@ -10,6 +10,9 @@
                  @cevt="handleEvent($event, funcs, emit)"
       />
     </span>
+    <div :class="menuDefinitions.twStyling" >
+      <dynamicMenu :config="menuDefinitions" @cevt="handleEvent($event, funcs, emit)" />
+    </div>
   </span>
 </template>
 
@@ -34,6 +37,7 @@ import vtextarea from "../components/vtextarea.vue"
 import listTable from "../components/listTable.vue";
 import htmlPasswordInput from '../components/htmlPasswordInput.vue';
 
+import dynamicMenu from '../components/dynamicMenu.vue';
 
 debugger;
 import {getDialogDefinitions} from "../components/dialogDefinitions2.js";
@@ -112,6 +116,11 @@ funcs[c.UNSET_CMD_HANDLER]= function(evt){
 funcs[c.FIELD_CHANGED]= function(evt){
   console.log('in c.FIELD_CHANGED-', evt);
   dialogData[evt[1]]=evt[2];
+}
+funcs[c.MENU_ITEM_SELECTED]= function(evt){
+  console.log('in c.-MENU_ITEM_SELECTED', evt);
+  debugger;
+  funcs[evt[1]]();
 }
 debugger;
 addActions(funcs);

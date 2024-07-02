@@ -360,15 +360,20 @@ const defs = function(dialogDef){
                 ],
                 defaultData:{},
                 menuDefs:{
-                    twStyling:'text-xs text-blue-500 w-[40%]',
+                    twStyling:'text-xs text-blue-500 w-[60%] mt-[15%] ml-[10%]',
                     items: [
                         { type: 'menuItem', config: { label: 'Login', actionCode: c.MENU_LOGIN } },
                         { type: 'menuItem', config: { label: 'Cancel', actionCode: c.MENU_CANCEL_LOGIN } },
                     ],
                 },
                 addActions:function(currentFuncs){
-                    currentFuncs[c.EXIT_DIALOG]=function(){
+                    currentFuncs[c.MENU_CANCEL_LOGIN]=function(){
+                        debugger;
                         console.log('new func exit dialog')
+                    }
+                    currentFuncs[c.MENU_LOGIN]=function(){
+                        debugger;
+                        console.log('new func menu login')
                     }
                     //return currentFuncs;
                 }

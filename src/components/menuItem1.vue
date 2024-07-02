@@ -40,6 +40,7 @@ if(typeof(props.config.value)=='function'){
 }
 
 const handleClick = function(){
+  debugger;
   emit('cevt', [c.MENU_ITEM_SELECTED, props.config.actionCode]);
 }
 
