@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-
+debugger;
 const props = defineProps({
   config: {
     type: Object,
@@ -16,7 +16,7 @@ const props = defineProps({
   },
   data:{
     type: Object,
-    required: true
+    required: false
   }
 });
 

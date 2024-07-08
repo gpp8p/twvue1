@@ -11,7 +11,7 @@
       />
     </span>
     <div :class="menuDefinitions.twStyling" >
-      <dynamicMenu :config="menuDefinitions" @cevt="handleEvent($event, funcs, emit)" />
+      <dynamicMenu :config="menuDefinitions" :data="menuData" @cevt="handleEvent($event, funcs, emit)" />
     </div>
   </span>
 </template>
@@ -37,7 +37,7 @@ import vtextarea from "../components/vtextarea.vue"
 import listTable from "../components/listTable.vue";
 import htmlPasswordInput from '../components/htmlPasswordInput.vue';
 
-import dynamicMenu from '../components/dynamicMenu.vue';
+import dynamicMenu from '../components/menu3.vue';
 
 debugger;
 import {getDialogDefinitions} from "../components/dialogDefinitions2.js";
@@ -57,7 +57,8 @@ const emit = defineEmits(['cevt']);
 const name = 'dialog'
 const funcs = [];
 const existingFuncs = [];
-const cmdHandlers = {}
+const cmdHandlers = {};
+const menuData = {};
 
 const handleCmd = function(args){
   console.log('handleCmd-', name, args);
@@ -120,7 +121,7 @@ funcs[c.FIELD_CHANGED]= function(evt){
 funcs[c.MENU_ITEM_SELECTED]= function(evt){
   console.log('in c.-MENU_ITEM_SELECTED', evt);
   debugger;
-  funcs[evt[1]]();
+  funcs[evt[1]](emit, dialogData);
 }
 debugger;
 addActions(funcs);

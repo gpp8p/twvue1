@@ -1,4 +1,8 @@
 import {c} from "../components/constants.js";
+import {getLogin} from "./login.js";
+import { defineEmits} from 'vue'
+
+
 
 
 
@@ -367,13 +371,19 @@ const defs = function(dialogDef){
                     ],
                 },
                 addActions:function(currentFuncs){
-                    currentFuncs[c.MENU_CANCEL_LOGIN]=function(){
+                    currentFuncs[c.MENU_CANCEL_LOGIN]=function(emit, dialogData){
                         debugger;
-                        console.log('new func exit dialog')
+                        console.log('new func exit dialog');
+  //                      const emit = defineEmits(['cevt']);
+                        emit('cevt',[c.EXIT_DIALOG])
                     }
-                    currentFuncs[c.MENU_LOGIN]=function(){
+                    currentFuncs[c.MENU_LOGIN]=function(emit, dialogData){
                         debugger;
-                        console.log('new func menu login')
+                        console.log('new func menu login');
+                        const {doLogin}= getLogin();
+                        doLogin(dialogData.userId, dialogData.password, emit, c)
+
+
                     }
                     //return currentFuncs;
                 }

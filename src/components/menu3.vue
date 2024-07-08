@@ -1,9 +1,9 @@
 <template>
   <div class="flex justify-evenly">
     <component
-        v-for="(item, index) in config.items"
+        v-for="(item, index) in props.config.items"
         :key="index"
-        :is="item.type"
+        :is="morphs[item.type]"
         :config="item.config"
         @cevt="handleEvent($event, funcs, emit)"
     ></component>
@@ -29,8 +29,10 @@ import {c} from "../components/constants.js";
 import { onMounted, onUnmounted } from 'vue'
 import {useEventHandler} from "./eventHandler.js";
 import {ref} from 'vue';
+import menuItem from './menuItem1.vue';
+import menuItemDrop from '../components//menuItemDrop.vue';
 
-
+debugger;
 const {handleEvent} = useEventHandler();
 const emit = defineEmits(['cevt']);
 const name = props.config.name;
@@ -83,6 +85,10 @@ onMounted(() => {
 onUnmounted(() => {
   emit('cevt', [c.UNSET_CMD_HANDLER, name]);
 })
+const morphs = {
+  menuItem,
+  menuItemDrop
+}
 
 </script>
 

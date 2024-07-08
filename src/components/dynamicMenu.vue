@@ -8,7 +8,7 @@
           :key="index"
           :is="item.type"
           :config="item.config"
-          @cevt="handleInput"
+          @cevt="handleEvent($event, funcs, emit)"
       ></component>
     </div>
 
@@ -26,6 +26,7 @@ import menuItemDrop from '../components//menuItemDrop.vue';
 import {c} from "./constants";
 import {useEventHandler} from "./eventHandler.js";
 const {handleEvent} = useEventHandler();
+const emit = defineEmits(['cevt']);
 
 
 export default defineComponent({
@@ -45,14 +46,17 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    /*
     const handleInput = (data) => {
       debugger;
-      emit('cevt', [c.MENU_ITEM_SELECTED, data[1]]);
+      emit('cevt', [c.EXIT_DIALOG]);
     };
 
     return {
       handleInput,
     };
+
+*/
   },
 });
 </script>
